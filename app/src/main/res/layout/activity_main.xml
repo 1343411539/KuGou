@@ -16,6 +16,10 @@
         android:text="Hello World!"
         android:id="@+id/textView" />
 
+    <android.hhh.com.kugou.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="#000"/>
     <CheckBox
         android:text="CheckBox"
         android:layout_width="wrap_content"
