@@ -18,9 +18,53 @@
         <LinearLayout
             android:id="@+id/menu_layout"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:background="@color/colorPrimaryDark"
-            android:layout_height="45dp">
+            android:layout_height="47dp">
+
+            <ImageButton
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/ic_菜单"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:text="我"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:text="听"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <Button
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:text="看"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/ic_加号1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -28,17 +72,18 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:background="@color/colorPrimaryDark"
-            android:layout_height="45dp">
+            android:layout_height="47dp">
         </LinearLayout>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_weight="9"
         android:layout_height="0dp"
         android:background="@color/colorAccent">
     </android.support.v4.view.ViewPager>
+
     <RelativeLayout
         android:id="@+id/bottom_Layout"
         android:layout_width="match_parent"
