@@ -67,17 +67,33 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:background="@color/colorPrimaryDark"
             android:layout_height="47dp">
-            <android.support.v7.widget.SearchView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                ></android.support.v7.widget.SearchView>
-        </LinearLayout>
+                android:background="@drawable/ic_sou_suo_kuang"
+                android:scaleX="0.9"
+                android:scaleY="0.6"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_sou_suo"
+                android:scaleX="0.4"
+                android:scaleY="0.4"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleX="0.8"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
+                ></EditText>
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
