@@ -79,6 +79,7 @@
                 android:scaleX="0.9"
                 android:scaleY="0.6"/>
             <ImageView
+                android:id="@+id/search_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_sou_suo"
@@ -88,9 +89,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleX="0.8"
-                android:gravity="center"
-                android:imeOptions="actionDone"
+                android:scaleY="0.8"
+                android:cursorVisible="false"
                 android:inputType="text"
+                android:textColor="@color/colorWhite"
+                android:onClick="search_click"
+                android:background="@null"
                 android:maxLines="1"
                 ></EditText>
         </FrameLayout>
