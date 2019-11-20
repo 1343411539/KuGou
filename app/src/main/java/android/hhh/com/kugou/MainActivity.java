@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -23,7 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private LinearLayout menuLayout;
     private FrameLayout searchLayout;
     private List<Fragment> fragmentList;
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         searchLayout.setLayoutParams(params);
         //构造适配器
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new me_Fragment());
+        fragments.add(new Me_Fragment());
         fragments.add(new listen_Fragment());
         fragments.add(new look_Fragment());
         FragAdapter adapter = new FragAdapter(getSupportFragmentManager(), fragments);
