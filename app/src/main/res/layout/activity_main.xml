@@ -10,109 +10,115 @@
     <LinearLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_weight="2"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary">
+        android:layout_weight="2"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/menu_layout"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="47dp"
             android:background="@color/colorPrimaryDark"
-            android:layout_height="47dp">
+            android:orientation="horizontal">
 
             <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:src="@drawable/ic_menu"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:src="@drawable/ic_menu" />
 
             <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="我"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25sp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:textSize="25sp" />
 
             <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="听"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25sp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:textSize="25sp" />
+
             <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="看"
-                android:textSize="25sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:textSize="25sp" />
+
             <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:src="@drawable/ic_plus_sign"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:src="@drawable/ic_plus_sign" />
 
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimaryDark"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:background="@color/colorPrimaryDark">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_sou_suo_kuang"
                 android:scaleX="0.9"
-                android:scaleY="0.6"/>
+                android:scaleY="0.6" />
+
             <ImageView
                 android:id="@+id/search_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_sou_suo"
                 android:scaleX="0.4"
-                android:scaleY="0.4"/>
+                android:scaleY="0.4"
+                android:src="@drawable/ic_sou_suo" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:background="@null"
                 android:cursorVisible="false"
                 android:inputType="text"
-                android:textColor="@color/colorWhite"
-                android:onClick="search_click"
-                android:background="@null"
                 android:maxLines="1"
-                ></EditText>
+                android:onClick="search_click"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:textColor="@color/colorWhite"></EditText>
         </FrameLayout>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="wrap_content"
-        android:layout_weight="9"
         android:layout_height="0dp"
+        android:layout_weight="9"
         android:background="@color/colorAccent">
+
     </android.support.v4.view.ViewPager>
 
     <RelativeLayout
         android:id="@+id/bottom_Layout"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/colorPrimary">
+
     </RelativeLayout>
 </LinearLayout>
