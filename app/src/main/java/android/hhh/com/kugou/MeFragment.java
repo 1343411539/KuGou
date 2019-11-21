@@ -1,15 +1,13 @@
 package android.hhh.com.kugou;
 
-import android.hhh.com.kugou.utils.ToastUtils;
+import android.hhh.com.kugou.xiongli.utils.ToastUtils;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 /**
  * Created by Administrator on 2019/11/17 0017.

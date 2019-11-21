@@ -1,10 +1,8 @@
-package android.hhh.com.kugou.adapters;
+package android.hhh.com.kugou.xiongli.adapters;
 
-import android.hhh.com.kugou.ProfessionActivity;
 import android.hhh.com.kugou.R;
-import android.hhh.com.kugou.beans.ItemBean;
+import android.hhh.com.kugou.xiongli.beans.ItemBean;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;

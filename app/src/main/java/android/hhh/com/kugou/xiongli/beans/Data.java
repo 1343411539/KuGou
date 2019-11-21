@@ -1,4 +1,4 @@
-package android.hhh.com.kugou.beans;
+package android.hhh.com.kugou.xiongli.beans;
 
 /**
  * Created by Li on 2019/11/20.

@@ -1,8 +1,8 @@
 package android.hhh.com.kugou;
 
-import android.hhh.com.kugou.adapters.ProfessionAdapter;
-import android.hhh.com.kugou.beans.Data;
-import android.hhh.com.kugou.beans.ItemBean;
+import android.hhh.com.kugou.xiongli.adapters.ProfessionAdapter;
+import android.hhh.com.kugou.xiongli.beans.Data;
+import android.hhh.com.kugou.xiongli.beans.ItemBean;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;

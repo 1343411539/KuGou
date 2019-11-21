@@ -1,4 +1,4 @@
-package android.hhh.com.kugou.utils;
+package android.hhh.com.kugou.xiongli.utils;
 
 import android.content.Context;
 import android.widget.Toast;
