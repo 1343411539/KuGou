@@ -14,7 +14,7 @@ import android.widget.Toast;
 /**
  * Created by Administrator on 2019/11/17 0017.
  */
-public class Me_Fragment extends Fragment implements View.OnClickListener {
+public class me_Fragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout head, local, collect, download, recently,
             musicHub, kSong, songMenu, generalize;

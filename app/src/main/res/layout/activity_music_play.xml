@@ -202,24 +202,32 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_like"/>
+                android:src="@drawable/ic_like"
+                android:background="@color/colorTouMing"/>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_video_light"/>
+                android:src="@drawable/ic_video_play"
+                android:background="@color/colorTouMing"/>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_download"
+                android:background="@color/colorTouMing"/>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_comment"
+                android:background="@color/colorTouMing"/>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_more_light"
+                android:background="@color/colorTouMing"/>
 
         </LinearLayout>
         <LinearLayout
