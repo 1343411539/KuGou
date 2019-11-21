@@ -21,7 +21,7 @@ import android.util.AttributeSet;
  * 创建时间： 2018/4/17 0017
  */
 
-public class CircleImageView extends AppCompatImageView{
+public class CircleImageView extends AppCompatImageView {
     private float width;
     private float height;
     private float radius;

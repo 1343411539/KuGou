@@ -61,43 +61,19 @@
                 android:background="#00000000"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:src="@drawable/ic_plus_sign"
+                android:src="@drawable/ic_plussign"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:background="@color/colorPrimaryDark"
             android:layout_height="47dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_sou_suo_kuang"
-                android:scaleX="0.9"
-                android:scaleY="0.6"/>
-            <ImageView
-                android:id="@+id/search_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_sou_suo"
-                android:scaleX="0.4"
-                android:scaleY="0.4"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:cursorVisible="false"
-                android:inputType="text"
-                android:textColor="@color/colorWhite"
-                android:onClick="search_click"
-                android:background="@null"
-                android:maxLines="1"
-                ></EditText>
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
@@ -105,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_weight="9"
         android:layout_height="0dp"
-        android:background="@color/colorWhite">
+        android:background="@color/colorAccent">
     </android.support.v4.view.ViewPager>
 
     <RelativeLayout
