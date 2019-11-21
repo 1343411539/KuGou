@@ -7,4 +7,5 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#121010</color>
     <color name="colorTouMing">#0000000</color>
+    <color name="colorDivider">#eeeeee</color>
 </resources>
