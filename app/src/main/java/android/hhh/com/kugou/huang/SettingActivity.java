@@ -1,7 +1,8 @@
-package android.hhh.com.kugou;
+package android.hhh.com.kugou.huang;
 
-import android.support.v7.app.AppCompatActivity;
+import android.hhh.com.kugou.R;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class SettingActivity extends AppCompatActivity {
 

@@ -4,7 +4,7 @@
     android:id="@+id/activity_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.hhh.com.kugou.SettingActivity">
+    tools:context="android.hhh.com.kugou.huang.SettingActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -234,7 +234,7 @@
                         android:layout_weight="4"
                         android:id="@+id/textView2" />
 
-                    <android.hhh.com.kugou.SlideButton
+                    <android.hhh.com.kugou.huang.SlideButton
                         android:id="@+id/sb_setting_2"
                         android:layout_width="15dp"
                         android:layout_height="25dp"
@@ -260,7 +260,7 @@
                         android:paddingBottom="15dp"
                         android:paddingLeft="20dp"
                         android:layout_weight="4"/>
-                    <android.hhh.com.kugou.SlideButton
+                    <android.hhh.com.kugou.huang.SlideButton
                         android:id="@+id/sb_setting_3"
                         android:layout_width="15dp"
                         android:layout_height="25dp"
@@ -286,7 +286,7 @@
                         android:paddingBottom="15dp"
                         android:paddingLeft="20dp"
                         android:layout_weight="4"/>
-                    <android.hhh.com.kugou.SlideButton
+                    <android.hhh.com.kugou.huang.SlideButton
                         android:id="@+id/sb_setting_4"
                         android:layout_width="15dp"
                         android:layout_height="25dp"
@@ -312,7 +312,7 @@
                         android:paddingBottom="15dp"
                         android:paddingLeft="20dp"
                         android:layout_weight="4"/>
-                    <android.hhh.com.kugou.SlideButton
+                    <android.hhh.com.kugou.huang.SlideButton
                         android:id="@+id/sb_setting_5"
                         android:layout_width="15dp"
                         android:layout_height="25dp"

@@ -1,4 +1,4 @@
-package android.hhh.com.kugou;
+package android.hhh.com.kugou.huang;
 
 import android.content.Context;
 import android.graphics.Bitmap;
