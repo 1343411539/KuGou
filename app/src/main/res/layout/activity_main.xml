@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -73,19 +74,23 @@
             android:background="@color/colorPrimaryDark"
             android:layout_height="47dp">
             <ImageView
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_sou_suo_kuang"
                 android:scaleX="0.9"
                 android:scaleY="0.6"/>
             <ImageView
+                android:clickable="false"
                 android:id="@+id/search_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_sou_suo"
                 android:scaleX="0.4"
                 android:scaleY="0.4"/>
+
             <EditText
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleX="0.8"
@@ -95,8 +100,8 @@
                 android:textColor="@color/colorWhite"
                 android:onClick="search_click"
                 android:background="@null"
-                android:maxLines="1"
-                ></EditText>
+                android:maxLines="1">
+            </EditText>
         </FrameLayout>
     </LinearLayout>
 
@@ -114,5 +119,18 @@
         android:layout_weight="1"
         android:layout_height="0dp"
         android:background="@color/colorPrimary">
+        <EditText
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:cursorVisible="false"
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:onClick="search_click"
+            android:background="@null"
+            android:maxLines="1">
+        </EditText>
     </RelativeLayout>
 </LinearLayout>
