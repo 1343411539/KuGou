@@ -8,10 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- 以单个TextView实现的"选项"控件 -->
-    <style name="AppTheme.SimleOption">
-        <!-- 按钮点击出现水波纹效果 -->
-        <item name="android:foreground">?@android:attr/selectableItemBackground</item>
-    </style>
-
 </resources>
