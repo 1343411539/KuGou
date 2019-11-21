@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         searchLayout.setLayoutParams(params);
         //构造适配器
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new Me_Fragment());
+        fragments.add(new me_Fragment());
         fragments.add(new listen_Fragment());
         fragments.add(new look_Fragment());
         FragAdapter adapter = new FragAdapter(getSupportFragmentManager(), fragments);

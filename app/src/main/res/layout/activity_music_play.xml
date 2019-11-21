@@ -171,15 +171,57 @@
                 android:layout_gravity="bottom"
                 android:src="@drawable/ic_chang_lai_yuan"/>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
         <ImageView
-            android:layout_weight="0.8"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp" />
+            android:layout_width="30dp"
+            android:src="@drawable/ic_white_round"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/round_alpha_image"
+            android:layout_width="30dp"
+            android:src="@drawable/ic_white_round"
+            android:alpha="100"
+            android:layout_height="wrap_content"
+            android:scaleX="0.4"
+            android:scaleY="0.4"/>
+    </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/colorAccent"></LinearLayout>
+            android:orientation="horizontal"
+            android:background="@color/colorAccent">
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_like"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_video_light"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_weight="2"
             android:layout_width="match_parent"

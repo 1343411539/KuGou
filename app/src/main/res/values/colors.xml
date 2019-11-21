@@ -6,6 +6,10 @@
     <color name="colorBigRed">#ff0202</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#121010</color>
+<<<<<<< Updated upstream
     <color name="colorTouMing">#000000</color>
+=======
+    <color name="colorTouMing">#00000000</color>
+>>>>>>> Stashed changes
     <color name="colorDivider">#eeeeee</color>
 </resources>
