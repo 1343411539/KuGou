@@ -18,19 +18,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             musicHub, kSong, songMenu, generalize;
     private View button;
 
-    private void initView(){
-        head = getActivity().findViewById(R.id.ll_head);
-        local = getActivity().findViewById(R.id.ll_local);
-        collect = getActivity().findViewById(R.id.ll_collect);
-        download = getActivity().findViewById(R.id.ll_download);
-        recently = getActivity().findViewById(R.id.ll_recently);
-        musicHub = getActivity().findViewById(R.id.ll_music_hub);
-        kSong = getActivity().findViewById(R.id.ll_k_song);
-        songMenu = getActivity().findViewById(R.id.ll_create_song_menu);
-        generalize = getActivity().findViewById(R.id.ll_generalize);
-        button = getActivity().findViewById(R.id.btn_user_defined);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,22 +35,9 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         setOnclick();
     }
 
-    private void setOnclick() {
-        head.setOnClickListener(this);
-        local.setOnClickListener(this);
-        collect.setOnClickListener(this);
-        download.setOnClickListener(this);
-        recently.setOnClickListener(this);
-        musicHub.setOnClickListener(this);
-        kSong.setOnClickListener(this);
-        songMenu.setOnClickListener(this);
-        generalize.setOnClickListener(this);
-        button.setOnClickListener(this);
-    }
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_head:
                 break;
             case R.id.ll_local:
@@ -88,5 +62,31 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    private void setOnclick() {
+        head.setOnClickListener(this);
+        local.setOnClickListener(this);
+        collect.setOnClickListener(this);
+        download.setOnClickListener(this);
+        recently.setOnClickListener(this);
+        musicHub.setOnClickListener(this);
+        kSong.setOnClickListener(this);
+        songMenu.setOnClickListener(this);
+        generalize.setOnClickListener(this);
+        button.setOnClickListener(this);
+    }
+
+    private void initView() {
+        head = getActivity().findViewById(R.id.ll_head);
+        local = getActivity().findViewById(R.id.ll_local);
+        collect = getActivity().findViewById(R.id.ll_collect);
+        download = getActivity().findViewById(R.id.ll_download);
+        recently = getActivity().findViewById(R.id.ll_recently);
+        musicHub = getActivity().findViewById(R.id.ll_music_hub);
+        kSong = getActivity().findViewById(R.id.ll_k_song);
+        songMenu = getActivity().findViewById(R.id.ll_create_song_menu);
+        generalize = getActivity().findViewById(R.id.ll_generalize);
+        button = getActivity().findViewById(R.id.btn_user_defined);
     }
 }

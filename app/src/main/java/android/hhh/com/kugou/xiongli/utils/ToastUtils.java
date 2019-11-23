@@ -13,10 +13,10 @@ public class ToastUtils {
 
     public static void showShort(Context context, CharSequence sequence) {
         if (toast == null) {
-            Toast.makeText(context, sequence, Toast.LENGTH_SHORT);
+            toast = Toast.makeText(context, sequence, Toast.LENGTH_SHORT);
         } else {
             toast.cancel();
-            Toast.makeText(context, sequence, Toast.LENGTH_SHORT);
+            toast = Toast.makeText(context, sequence, Toast.LENGTH_SHORT);
         }
         toast.show();
     }
@@ -25,8 +25,6 @@ public class ToastUtils {
         if (toast == null) {
             toast = Toast.makeText(context, sequence, Toast.LENGTH_LONG);
         } else {
-/*            toast.setText(sequence);
-            toast.setDuration(Toast.LENGTH_LONG);*/
             toast.cancel();
             toast = Toast.makeText(context, sequence, Toast.LENGTH_LONG);
         }

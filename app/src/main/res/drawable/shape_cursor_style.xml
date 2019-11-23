@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--设置EditView光标的粗细-->
+    <size android:width="0.5dp" />
+    <!--设置EditView光标的颜色-->
+    <solid android:color="#000000" />
+</shape>

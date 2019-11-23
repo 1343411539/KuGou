@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- 设置Toolbar标题字体的颜色大小 -->
+    <style name="toolbar_title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--toolbar标题字体大小-->
+        <item name="android:textSize">18sp</item>
+        <!--toolbar标题字体颜色-->
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowFrame">@null</item><!-- 边框 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item><!-- 外部变灰 -->
+        <item name="android:windowContentOverlay">@null</item><!-- 内部阴影 -->
+        <item name="android:windowAnimationStyle">@style/dialog_animation</item>
+    </style>
+
+    <style name="dialog_animation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
 </resources>

@@ -5,12 +5,13 @@
     <color name="colorAccent">#f9441c</color>
     <color name="colorBigRed">#ff0202</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorBlack">#121010</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorTouMing">#00000000</color>
->>>>>>> Stashed changes
-    <color name="colorDivider">#eeeeee</color>
+    >>>>>>> Stashed changes
+    <color name="colorDivider">#d8d8d8</color>
+    <color name="colorView">#eeeeee</color>
     <color name="settingWhite">#ffffff</color>
-        <color name="notChecked">#20000000</color>
-        <color name="isChecked">#20ffffff</color>
+    <color name="notChecked">#20000000</color>
+    <color name="isChecked">#20ffffff</color>
 
 </resources>
