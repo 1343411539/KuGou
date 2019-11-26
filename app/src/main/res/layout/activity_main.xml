@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -108,7 +109,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="wrap_content"
-        android:layout_weight="8.8"
+        android:layout_weight="8.6"
         android:layout_height="0dp"
         android:background="@color/colorWhite">
     </android.support.v4.view.ViewPager>
@@ -116,13 +117,77 @@
     <RelativeLayout
         android:id="@+id/bottom_Layout"
         android:layout_width="match_parent"
-        android:layout_weight="1.2"
+        android:layout_weight="1.4"
+
         android:layout_height="0dp"
-        android:background="@color/colorPrimary">
-        <android.hhh.com.kugou.huang.CircleImageView
+        android:background="@color/colorTouMing">
+        <ImageView
+            android:id="@+id/bottom_Image"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+           android:layout_alignParentBottom="true"
+            android:src="@color/colorWhite"/>
+        <SeekBar
+            android:id="@+id/playSeekBar"
+            android:layout_width="750px"
+            android:background="@color/colorHui"
+            android:layout_height="1.5dp"
+            android:layout_alignRight="@+id/bottom_Image"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:id="@+id/name_TV"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/playSeekBar"
+            android:layout_alignTop="@+id/playSeekBar"
+            android:layout_marginTop="10dp"
+            android:text="歌名"
+            android:textSize="17sp"/>
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_TV"
+            android:layout_alignLeft="@+id/playSeekBar"
+            android:text="作者"
+            android:textSize="13sp"/>
+        <ImageButton
+            android:id="@+id/playmenu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/playSeekBar"
+            android:layout_alignRight="@+id/playSeekBar"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/ic_playmenu_black"
+            android:background="@color/colorTouMing"/>
+        <ImageButton
+            android:id="@+id/nextsong_button"
+            android:src="@drawable/ic_nextsong_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/playSeekBar"
+            android:layout_alignRight="@+id/playmenu_button"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/colorTouMing"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/playSeekBar"
+            android:layout_alignRight="@+id/nextsong_button"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/ic_musicplay_black"
+            android:background="@color/colorTouMing"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_image"
             android:layout_width="60dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_height="60dp"
-            android:src="@color/colorBigRed" />
+            android:layout_marginBottom="5dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/colorHui"
+            android:src="@mipmap/logo" />
+
     </RelativeLayout>
 </LinearLayout>
