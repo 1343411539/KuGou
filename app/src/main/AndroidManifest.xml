@@ -9,8 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
-
         </activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -21,7 +19,6 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ProfessionActivity">
-
         </activity>
 
         <activity android:name=".huang.SettingActivity">
@@ -31,7 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MusicPlayActivity"></activity>
+
+        <activity android:name=".MusicPlayActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/gp_title" android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_attachment"
+            android:title="消息中心"></item>
+        <item
+            android:id="@+id/navigation_item_images"
+            android:title="皮肤中心" >@styles/menuStyle</item>
+        <item
+            android:id="@+id/navigation_item_location"
+            android:title="会员中心" />
+    </group>
+    <group android:id="@+id/gp_body" android:checkableBehavior="single">
+            <item
+                android:title="定时关闭" />
+            <item
+                android:title="蝰蛇音效" />
+            <item
+                android:title="听歌识曲" />
+            <item
+                android:title="音乐工具" />
+            <item
+                android:title="驾驶模式" />
+            <item
+                android:title="铃声彩铃" />
+            <item
+                android:title="青少年模式" />
+            <item
+                android:title="青少年模式" />
+            <item
+                android:title="青少年模式" />
+            <item
+                android:title="青少年模式" />
+            <item
+                android:title="青少年模式" />
+    </group>
+</menu>
