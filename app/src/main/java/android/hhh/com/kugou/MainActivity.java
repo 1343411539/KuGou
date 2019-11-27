@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private Button listenBtn;
     private Button lookBtn;
     private CircleImageView circleImageView;
-    private Intent intent;
+    private Intent intent1;
     private  String path;
     private  myConn conn;
     MusicService.MyBinder binder;
@@ -80,14 +80,14 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         listenBtn=(Button)findViewById(R.id.listen_btn);
         lookBtn =(Button)findViewById(R.id.look_btn);
         circleImageView=(CircleImageView)findViewById(R.id.circle_image);
+        meBtn.setTextSize(30);
+        meBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        meBtn.setTextColor(Color.WHITE);
+
         meBtn.setOnClickListener(this);
         listenBtn.setOnClickListener(this);
         lookBtn.setOnClickListener(this);
         circleImageView.setOnClickListener(this);
-
-        meBtn.setTextSize(30);
-        meBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        meBtn.setTextColor(Color.WHITE);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -111,12 +111,18 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 lookBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
                 lookBtn.setTextColor(Color.parseColor("#1296db"));
                 if(position==0){
+                    meBtn.setTextSize(30);
+                    meBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                     meBtn.setTextColor(Color.WHITE);
                 }
                 else if(position==1){
+                    listenBtn.setTextSize(30);
+                    listenBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                     listenBtn.setTextColor(Color.WHITE);
                 }
                 else if(position==2){
+                    lookBtn.setTextSize(30);
+                    lookBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                     lookBtn.setTextColor(Color.WHITE);
                 }
 
@@ -133,8 +139,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
         conn =new myConn();
-        intent =new Intent(this,MusicService.class);
-        bindService(intent,conn,BIND_AUTO_CREATE);
+        intent1 =new Intent(this,MusicService.class);
+        bindService(intent1,conn,BIND_AUTO_CREATE);
     }
     private class myConn implements ServiceConnection{
         public void onServiceConnected(ComponentName name, IBinder service){
@@ -144,7 +150,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         }
     }
 
-
+    @Override
     public  void  onClick(View v){
         switch (v.getId()){
             case R.id.me_btn:
@@ -165,7 +171,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 songInfo.setAlbumImagePath("");
                 songInfo.setBackgroundImagePath("");
                 songInfo.setAudioFilePath("");
-                intent.putExtra("book",new Gson().toJson(songInfo));
+                intent.putExtra("songInfo",new Gson().toJson(songInfo));
                 startActivity(intent);
                 break;
             case R.id.musicplay_IBtn:

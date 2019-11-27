@@ -21,7 +21,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         roundAlphaImage.setAlpha(150);
 
         //接收数据
-        String songJson=getIntent().getStringExtra("book");
+        String songJson=getIntent().getStringExtra("songInfo");
         SongInfo songInfo=new Gson().fromJson(songJson,SongInfo.class);
         //显示数据
         songNameTV=(TextView)findViewById(R.id.songName_TV);
