@@ -25,14 +25,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-    compile 'com.google.code.findbugs:jsr305:2.0.1'
-    compile 'org.jetbrains:annotations-java5:15.0'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.jaeger.statusbarutil:library:1.4.0'
-    compile 'de.hdodenhof:circleimageview:2.1.0' //它可以用来轻松实现图片圆形化的功能
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
 }
