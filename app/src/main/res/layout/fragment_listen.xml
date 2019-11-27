@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListenFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="275dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp" >
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dip"
+                    android:layout_gravity="bottom"
+                    android:background="#33000000"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="图片标题"
+                        android:textColor="@android:color/white" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+
+                        android:orientation="horizontal" >
+
+                        <View
+                            android:id="@+id/dot_0"
+                            android:layout_width="5dip"
+                            android:layout_height="5dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="@drawable/indicator_select"/>
+
+                        <View
+                            android:id="@+id/dot_1"
+                            android:layout_width="5dip"
+                            android:layout_height="5dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="@drawable/indicator_no_select"/>
+                        <View
+                            android:id="@+id/dot_2"
+                            android:layout_width="5dip"
+                            android:layout_height="5dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="@drawable/indicator_no_select"/>
+                        <View
+                            android:id="@+id/dot_3"
+                            android:layout_width="5dip"
+                            android:layout_height="5dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="@drawable/indicator_no_select"/>
+                        <View
+                            android:id="@+id/dot_4"
+                            android:layout_width="5dip"
+                            android:layout_height="5dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="@drawable/indicator_no_select"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/musiclibrary_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/musiclibrary" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="乐库"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/songsheet_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/songsheet" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="歌单"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/radiostation_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/radiostation" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="电台·听书"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/love_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/love" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="猜你喜欢"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/recommenddaily_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/recommenddaily" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="每日推荐"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/more_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/more" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="更多"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/newsong_btn"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="新歌"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/broadcast_btn"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="直播"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/song_btn"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="歌单"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/video_btn"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="视频"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/shortvideo_btn"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="短视频"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="1dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/sort_btn"
+                    android:layout_weight="1"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/classification" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

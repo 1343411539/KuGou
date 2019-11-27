@@ -23,14 +23,16 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private ImageView upDown;
     private boolean isHide = true;// 自建歌单 列表 是否是隐藏的，默认为true
 
+    //每次创建、绘制该Fragment的View组件时回调该方法，Fragment将会显示该方法返回的View组件。
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_me, container, false);//false代表不用添加到根目录去
+        View view = inflater.inflate(R.layout.activity_setting, container, false);//false代表不用添加到根目录去
         return view;
     }
 
-    //通过getActivity()获得Fragment依附的Activity对象
+    //当Fragment所在的Activity被启动完成后回调该方法。
+    //
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -101,6 +103,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
     private void initView() {
         //初始化LineaLayout控件
+        //通过getActivity()获得Fragment依附的Activity对象
         head = getActivity().findViewById(R.id.ll_head);
         local = getActivity().findViewById(R.id.ll_local);
         collect = getActivity().findViewById(R.id.ll_collect);
