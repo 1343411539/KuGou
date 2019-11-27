@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/songName_TV"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -56,6 +57,7 @@
                 android:background="@color/colorTouMing"/>
         </LinearLayout>
     <TextView
+        android:id="@+id/authorName_TV"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
@@ -187,7 +189,7 @@
             android:scaleType="fitStart"
             android:id="@+id/round_alpha_image"
             android:layout_width="30dp"
-            android:src="@drawable/ic_white_round"
+            android:src="@drawable/ic_hui_round"
             android:alpha="100"
             android:layout_height="wrap_content"
             android:scaleX="0.4"
@@ -250,10 +252,15 @@
             android:gravity="center"
             android:textSize="10sp"
             android:textColor="@color/colorWhite"/>
-        <ImageButton
+        <SeekBar
+            android:id="@+id/playSeekBar"
             android:layout_width="0dp"
             android:layout_weight="4.6"
-            android:layout_height="match_parent" />
+            android:background="@color/colorHui"
+            android:layout_height="1.5dp"
+            android:layout_alignRight="@+id/bottom_Image"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.6"

@@ -34,6 +34,7 @@
                 android:layout_height="match_parent" />
 
             <Button
+                android:id="@+id/me_btn"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="我"
@@ -43,6 +44,7 @@
                 android:layout_height="match_parent" />
 
             <Button
+                android:id="@+id/listen_btn"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="听"
@@ -51,6 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <Button
+                android:id="@+id/look_btn"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="看"
@@ -118,17 +121,18 @@
         android:id="@+id/bottom_Layout"
         android:layout_width="match_parent"
         android:layout_weight="1.4"
-
         android:layout_height="0dp"
         android:background="@color/colorTouMing">
         <ImageView
             android:id="@+id/bottom_Image"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-           android:layout_alignParentBottom="true"
+            android:layout_alignParentBottom="true"
             android:src="@color/colorWhite"/>
         <SeekBar
             android:id="@+id/playSeekBar"
+            android:layout_alignLeft="@+id/circle_image"
+            android:layout_marginLeft="70dp"
             android:layout_width="750px"
             android:background="@color/colorHui"
             android:layout_height="1.5dp"
@@ -152,7 +156,7 @@
             android:text="作者"
             android:textSize="13sp"/>
         <ImageButton
-            android:id="@+id/playmenu_button"
+            android:id="@+id/playmenu_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/playSeekBar"
@@ -161,20 +165,21 @@
             android:src="@drawable/ic_playmenu_black"
             android:background="@color/colorTouMing"/>
         <ImageButton
-            android:id="@+id/nextsong_button"
+            android:id="@+id/nextsong_btn"
             android:src="@drawable/ic_nextsong_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/playSeekBar"
-            android:layout_alignRight="@+id/playmenu_button"
+            android:layout_alignRight="@+id/playmenu_btn"
             android:layout_marginRight="50dp"
             android:layout_marginTop="13dp"
             android:background="@color/colorTouMing"/>
         <ImageButton
+            android:id="@+id/musicplay_IBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/playSeekBar"
-            android:layout_alignRight="@+id/nextsong_button"
+            android:layout_alignRight="@+id/nextsong_btn"
             android:layout_marginRight="50dp"
             android:layout_marginTop="13dp"
             android:src="@drawable/ic_musicplay_black"

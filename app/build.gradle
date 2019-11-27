@@ -34,5 +34,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.jaeger.statusbarutil:library:1.4.0'
-    compile 'de.hdodenhof:circleimageview:2.1.0' //它可以用来轻松实现图片圆形化的功能
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    //它可以用来轻松实现图片圆形化的功能
+    compile 'com.google.code.gson:gson:2.2.4'
 }
