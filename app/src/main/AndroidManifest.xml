@@ -9,6 +9,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".yu.MusicPlayActivity">
 
         </activity>
         <!--
@@ -19,15 +27,12 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ProfessionActivity" />
-        <activity android:name=".EditInfoActivity"></activity>
-        <activity android:name=".huang.SettingActivity"></activity>
-        <activity android:name=".InformationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ProfessionActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+
+        <activity android:name=".huang.SettingActivity">
+
         </activity>
     </application>
 

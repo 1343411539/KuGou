@@ -12,6 +12,17 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
     private LinearLayout portrait, nickname, sex, district, birthday, profession, signature,
             hobbies, account, id, age , certification;
+/*    private LinearLayout nickname;
+    private LinearLayout sex;
+    private LinearLayout district;
+    private LinearLayout birthday;
+    private LinearLayout profession;
+    private LinearLayout signature;
+    private LinearLayout hobbies;
+    private LinearLayout account;
+    private LinearLayout id;
+    private LinearLayout age;
+    private LinearLayout certification;*/
     private Intent intent;
     private Toolbar navigationIcon;
     private SexDialog dialog;
