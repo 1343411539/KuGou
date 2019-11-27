@@ -91,8 +91,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ly_setting_1"
                         android:orientation="horizontal"
-                        android:clickable="true"
                         android:background="#20000000"
+                        android:clickable="true"
                         android:foreground="?attr/selectableItemBackground">
                         <TextView
                             android:layout_width="wrap_content"

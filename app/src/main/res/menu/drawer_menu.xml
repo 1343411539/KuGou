@@ -6,7 +6,7 @@
             android:title="消息中心"></item>
         <item
             android:id="@+id/navigation_item_images"
-            android:title="皮肤中心" >@styles/menuStyle</item>
+            android:title="皮肤中心" ></item>
         <item
             android:id="@+id/navigation_item_location"
             android:title="会员中心" />
