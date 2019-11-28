@@ -10,7 +10,7 @@ public class SongInfo {
     private String authorName;
     private String backgroundImagePath;
     private String audioFilePath;
-    private String AlbumImagePath;
+    private String albumImagePath;
 
     public int getID() {
         return ID;
@@ -28,11 +28,11 @@ public class SongInfo {
     }
 
     public String getAlbumImagePath() {
-        return AlbumImagePath;
+        return albumImagePath;
     }
 
     public void setAlbumImagePath(String albumImagePath) {
-        AlbumImagePath = albumImagePath;
+        this.albumImagePath = albumImagePath;
     }
 
     public String getAudioFilePath() {

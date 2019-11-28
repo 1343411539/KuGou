@@ -73,9 +73,10 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         fragments.add(new ListenFragment());
         fragments.add(new LookFragment());
         FragAdapter adapter = new FragAdapter(getSupportFragmentManager(), fragments);
-        //
+        //设定适配器
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(adapter);
+
         meBtn =(Button)findViewById(R.id.me_btn);
         listenBtn=(Button)findViewById(R.id.listen_btn);
         lookBtn =(Button)findViewById(R.id.look_btn);
@@ -83,7 +84,6 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         meBtn.setTextSize(30);
         meBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         meBtn.setTextColor(Color.WHITE);
-
         meBtn.setOnClickListener(this);
         listenBtn.setOnClickListener(this);
         lookBtn.setOnClickListener(this);
@@ -134,7 +134,6 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
             }
         });
         //音乐播放
-        setContentView(R.layout.activity_main);
         path="ssssssss";
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
@@ -142,18 +141,11 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         intent1 =new Intent(this,MusicService.class);
         bindService(intent1,conn,BIND_AUTO_CREATE);
     }
-    private class myConn implements ServiceConnection{
-        public void onServiceConnected(ComponentName name, IBinder service){
-            binder=(MusicService.MyBinder)service;
-        }
-        public void onServiceDisconnected(ComponentName name){
-        }
-    }
-
     @Override
     public  void  onClick(View v){
         switch (v.getId()){
             case R.id.me_btn:
+                meBtn.setTextColor(Color.WHITE);
                 vp.setCurrentItem(0);
                 break;
             case R.id.listen_btn:
@@ -187,6 +179,16 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 break;
         }
     }
+
+    private class myConn implements ServiceConnection{
+        public void onServiceConnected(ComponentName name, IBinder service){
+            binder=(MusicService.MyBinder)service;
+        }
+        public void onServiceDisconnected(ComponentName name){
+        }
+    }
+
+
     protected  void onDestroy(){
         unbindService(conn);
         super.onDestroy();
