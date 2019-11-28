@@ -20,7 +20,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp" >
+                android:layout_height="250dp" >
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/vp"
@@ -46,7 +46,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dip"
-
                         android:orientation="horizontal" >
 
                         <View
@@ -108,7 +107,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/musiclibrary_btn"
+                            android:id="@+id/musiclibrary_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -131,7 +130,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/songsheet_btn"
+                            android:id="@+id/songsheet_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -154,7 +153,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/radiostation_btn"
+                            android:id="@+id/radiostation_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -184,7 +183,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/love_btn"
+                            android:id="@+id/love_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -207,7 +206,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/recommenddaily_btn"
+                            android:id="@+id/recommenddaily_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -230,13 +229,12 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/more_btn"
+                            android:id="@+id/more_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/more"
-                            />
+                            android:background="@drawable/more" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -269,7 +267,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
                 <Button
-                    android:id="@+id/song_btn"
+                    android:id="@+id/songsheet_btn"
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:text="歌单"
@@ -307,7 +305,6 @@
                     android:background="@drawable/classification" />
 
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 
