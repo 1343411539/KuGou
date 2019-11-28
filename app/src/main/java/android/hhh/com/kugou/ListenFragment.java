@@ -1,5 +1,9 @@
 package android.hhh.com.kugou;
 
+import android.content.Intent;
+import android.hhh.com.kugou.wangsong.Love;
+import android.hhh.com.kugou.wangsong.MusicLibrary;
+import android.hhh.com.kugou.wangsong.SongSheet;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,20 +53,29 @@ public class ListenFragment extends android.support.v4.app.Fragment {
     private ViewPagerAdapter adapter;
     private ScheduledExecutorService scheduledExecutorService;
 
+    private ImageButton musiclibrary_ib, songsheet_ib, love_ib;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mView=inflater.inflate(R.layout.fragment_listen, null);
-        setView();
+        mView = inflater.inflate(R.layout.fragment_listen, null);
+        setView();//轮转播放图片添加
+
+        initView(); //按钮触发事件
+
         return mView;
     }
-    private void setView(){
-        mViewPaper = (ViewPager)mView.findViewById(R.id.vp);
+
+
+    //轮转播放图片添加
+    private void setView() {
+        mViewPaper = (ViewPager) mView.findViewById(R.id.vp);
 
         //显示的图片
         images = new ArrayList<ImageView>();
-        for(int i = 0; i < imageIds.length; i++){
+        for (int i = 0; i < imageIds.length; i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setBackgroundResource(imageIds[i]);
             images.add(imageView);
@@ -146,18 +160,18 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleWithFixedDelay(
                 new ViewPageTask(),
-                2,
-                2,
+                7,
+                7,
                 TimeUnit.SECONDS);
     }
 
 
     /**
      * 图片轮播任务
-     * @author liuyazhuang
      *
+     * @author liuyazhuang
      */
-    private class ViewPageTask implements Runnable{
+    private class ViewPageTask implements Runnable {
 
         @Override
         public void run() {
@@ -169,18 +183,50 @@ public class ListenFragment extends android.support.v4.app.Fragment {
     /**
      * 接收子线程传递过来的数据
      */
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             mViewPaper.setCurrentItem(currentItem);
-        };
+        }
+
+        ;
     };
+
     @Override
     public void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
-        if(scheduledExecutorService != null){
+        if (scheduledExecutorService != null) {
             scheduledExecutorService.shutdown();
             scheduledExecutorService = null;
+        }
+    }
+
+
+    private void initView() {
+        musiclibrary_ib = (ImageButton) mView.findViewById(R.id.musiclibrary_ib);
+        musiclibrary_ib.setOnClickListener(new ButtonListener());
+        songsheet_ib = (ImageButton) mView.findViewById(R.id.songsheet_ib);
+        songsheet_ib.setOnClickListener(new ButtonListener());
+        love_ib=mView.findViewById(R.id.love_ib);
+        love_ib.setOnClickListener(new ButtonListener());
+
+    }
+
+    private class ButtonListener implements View.OnClickListener {
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.musiclibrary_ib:
+                    startActivity(new Intent(getActivity(), MusicLibrary.class));
+                    break;
+                case R.id.songsheet_ib:
+                    startActivity(new Intent(getActivity(), SongSheet.class));
+                    break;
+                case R.id.love_ib:
+                    startActivity(new Intent(getActivity(), Love.class));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
