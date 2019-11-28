@@ -255,6 +255,7 @@
         <SeekBar
             android:id="@+id/playSeekBar"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_weight="4.6"
             android:background="@color/colorHui"
             android:layout_height="1.5dp"
