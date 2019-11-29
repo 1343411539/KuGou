@@ -8,6 +8,10 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
 /**
  * Created by Administrator on 2019/11/27 0027.
  */
@@ -15,9 +19,28 @@ import android.os.IBinder;
 public class MusicService extends Service {
     private static final  String TAG="MusicService";
     public MediaPlayer mediaPlayer;
-     public class MyBinder extends Binder{
+    private int point;
+    private List<SongInfo> songInfos;
+    MusicService() throws IOException {
+        InputStream is=this.getAssets().open("music.json");
+        songInfos=SongInfoService.getInfosFromJson(is);
+        point=0;
+        System.out.println("获取数据成功"+":"+songInfos.get(point));
+
+    }
+    public class MyBinder extends Binder{
+        public List<SongInfo> getSongInfos() {
+            return songInfos;
+        }
+        public int getPoint() {
+            return point;
+        }
+        public SongInfo getTheSongInfo() throws IOException {
+            System.out.println("获取数据成功"+":"+songInfos.get(point));
+            return songInfos.get(point);
+        }
         //播放音乐
-        public void play(String path){
+        public void play(){
             try{
                 if (mediaPlayer==null){
                     //创建一个Mediaplayer播放器
@@ -25,7 +48,7 @@ public class MusicService extends Service {
                     //指定参数为音频文件
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     //指定播放路径
-                    mediaPlayer.setDataSource(path);
+                    mediaPlayer.setDataSource(songInfos.get(point).getAudioFilePath());
                     //准备播放
                     mediaPlayer.prepare();
                     mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
@@ -34,11 +57,11 @@ public class MusicService extends Service {
                             mediaPlayer.start();
                         }
                     });
-                }else if(mediaPlayer.isPlaying()){
+                }else if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
                     this.pause();
 
                 }
-                else{
+                else if(mediaPlayer!=null&&!mediaPlayer.isPlaying()){
                     int position = getCurrentProgress();
                     mediaPlayer.seekTo(position);
                     try{
@@ -60,10 +83,28 @@ public class MusicService extends Service {
                 mediaPlayer.start();
             }
         }
+        public void next() {
+            point = point == songInfos.size() - 1 ? 0 : point + 1;
+            play();
+        }
+
+        public void last() {
+            point = point == 0 ? songInfos.size() - 1 : point - 1;
+            play();
+        }
+        public void stop() {
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+            }
+        }
     }
     public void onCreate(){
         super.onCreate();
     }
+
+
+
     //获取当前进度
     public int getCurrentProgress(){
         if (mediaPlayer!=null&mediaPlayer.isPlaying()){
