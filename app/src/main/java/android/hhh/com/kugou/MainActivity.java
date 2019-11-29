@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         //绑定服务 获取音乐
         conn =new myConn();
         intent1 =new Intent(this,MusicService.class);
-        bindService(intent1,conn,BIND_AUTO_CREATE);
+        bindService(intent1,conn, BIND_AUTO_CREATE);
         //动态设置 menuLayout和searchLayout 的大小
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int screenWidth = dm.widthPixels;
@@ -160,17 +160,17 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
         //设置歌名 歌手名
-        try {
+        /*try {
             System.out.print(binder.toString());
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             //设置圆图
             Bitmap bitmap= BitmapFactory.decodeFile(binder.getTheSongInfo().getAlbumImagePath());
-            Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
+           Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
             circleImageView.setImageDrawable(fengmianDrawable);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 
