@@ -20,16 +20,13 @@ import java.util.List;
 public class MusicService extends Service {
     private static final  String TAG="MusicService";
     public MediaPlayer mediaPlayer;
-    private int point;
+    private int point=0;
+    private InputStream is;
     private List<SongInfo> songInfos;
 
-    MusicService() throws IOException {
-        InputStream is=this.getAssets().open("music.json");
-        songInfos=SongInfoService.getInfosFromJson(is);
-        point=0;
-        System.out.println("获取数据成功"+":"+songInfos.get(point));
-
+    public MusicService() throws IOException {
     }
+
     @Override
     public IBinder onBind(Intent intent){
         return new MyBinder();
@@ -108,6 +105,12 @@ public class MusicService extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        try {
+            is=this.getAssets().open("music.json");
+            songInfos=SongInfoService.getInfosFromJson(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Log.i("MusicService","创建服务");
     }
 

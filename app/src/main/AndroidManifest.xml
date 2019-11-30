@@ -33,9 +33,10 @@
         <activity android:name=".huang.SettingActivity" />
         <activity android:name=".EditInfoActivity" />
         <activity android:name=".NicknameActivity" />
+        <service android:name=".yu.MusicService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
-    <service android:name=".service.MusicService"
-        android:exported="false"
-        />
+
 
 </manifest>
