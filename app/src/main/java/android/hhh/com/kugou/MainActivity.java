@@ -1,6 +1,7 @@
 package android.hhh.com.kugou;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
@@ -59,8 +60,6 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private TextView songNameTV;
     private TextView authorNameTV;
 
-
-
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -71,10 +70,12 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //绑定服务 获取音乐
+        //绑定服务
+        Log.v("hhhhhh","运行到这里了");
         conn =new myConn();
         intent1 =new Intent(this,MusicService.class);
         bindService(intent1,conn, BIND_AUTO_CREATE);
+
         //动态设置 menuLayout和searchLayout 的大小
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int screenWidth = dm.widthPixels;
@@ -160,8 +161,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
         //设置歌名 歌手名
-        /*try {
-            System.out.print(binder.toString());
+       /* try {
+            System.out.print(musicService.toString());
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             //设置圆图
@@ -217,9 +218,10 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     }
 
     private class myConn implements ServiceConnection{
-        public void onServiceConnected(ComponentName name, IBinder service){
+        public void onServiceConnected(ComponentName name, IBinder service) {
             binder=(MusicService.MyBinder)service;
             Log.i("MainActivity","服务成功绑定，内存地址为："+binder.toString());
+
         }
         public void onServiceDisconnected(ComponentName name){
         }

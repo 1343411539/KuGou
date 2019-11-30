@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +22,17 @@ public class MusicService extends Service {
     public MediaPlayer mediaPlayer;
     private int point;
     private List<SongInfo> songInfos;
+
     MusicService() throws IOException {
         InputStream is=this.getAssets().open("music.json");
         songInfos=SongInfoService.getInfosFromJson(is);
         point=0;
         System.out.println("获取数据成功"+":"+songInfos.get(point));
 
+    }
+    @Override
+    public IBinder onBind(Intent intent){
+        return new MyBinder();
     }
     public class MyBinder extends Binder{
         public List<SongInfo> getSongInfos() {
@@ -36,7 +42,7 @@ public class MusicService extends Service {
             return point;
         }
         public SongInfo getTheSongInfo() throws IOException {
-            System.out.println("获取数据成功"+":"+songInfos.get(point));
+            Log.v("musicService","获取数据成功"+":"+songInfos.get(point));
             return songInfos.get(point);
         }
         //播放音乐
@@ -99,9 +105,12 @@ public class MusicService extends Service {
             }
         }
     }
+    @Override
     public void onCreate(){
         super.onCreate();
+        Log.i("MusicService","创建服务");
     }
+
 
 
 
@@ -123,8 +132,5 @@ public class MusicService extends Service {
         }
         super.onDestroy();
     }
-    @Override
-    public IBinder onBind(Intent intent){
-        return new MyBinder();
-    }
+
 }

@@ -34,5 +34,8 @@
         <activity android:name=".EditInfoActivity" />
         <activity android:name=".NicknameActivity" />
     </application>
+    <service android:name=".service.MusicService"
+        android:exported="false"
+        />
 
 </manifest>
