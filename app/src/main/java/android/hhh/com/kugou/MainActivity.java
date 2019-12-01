@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.Messenger;
 import android.view.View;
 
 
@@ -53,12 +56,15 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private Button listenBtn;
     private Button lookBtn;
     private ImageButton musicPlayBtn;
-    private CircleImageView circleImageView;
+    private  CircleImageView circleImageView;
     private Intent intent1;
     private  myConn conn;
     MusicService.MyBinder binder;
-    private TextView songNameTV;
-    private TextView authorNameTV;
+    private  TextView songNameTV;
+    private  TextView authorNameTV;
+    private Messenger mActivityMessenger;
+    //private Handler handler;
+    private Messenger mServiceMessenger;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -161,22 +167,32 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         });
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
-        //设置歌名 歌手名
-      /* try {
-            System.out.print(binder.toString());
-            songNameTV.setText(binder.getTheSongInfo().getSongName());
-            authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
-            //设置圆图
-            Bitmap bitmap= BitmapFactory.decodeFile(binder.getTheSongInfo().getAlbumImagePath());
-           Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
-            circleImageView.setImageDrawable(fengmianDrawable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
 
     }
+    public Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            //处理消息
+            Bundle bundle=msg.getData();
+            //获取歌曲长度和当前播放位置，并设置到进度条上
+            //设置歌名 歌手名
+            //System.out.print(binder.toString());
+            msg.replyTo=mServiceMessenger;
+            if (msg.what==1) {
+                songNameTV.setText(bundle.getString("songName"));
+                authorNameTV.setText(bundle.getString("authorName"));
+                //设置圆图
+                Bitmap bitmap = BitmapFactory.decodeFile(bundle.getString("AlbumImage"));
+                Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
+                circleImageView.setImageDrawable(fengmianDrawable);
+            }
+            else if(msg.what==2){
+
+            }
+
+
+        }
+    };
     @Override
     public  void  onClick(View v){
         switch (v.getId()){
@@ -199,7 +215,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 try {
                     if(!TextUtils.isEmpty(binder.getTheSongInfo().getAudioFilePath())){
                         if(musicPlayBtn.getDrawable()==getResources().getDrawable(R.drawable.ic_musicplay))
-                            musicPlayBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_stop));
+                            musicPlayBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause_black));
                         else
                             musicPlayBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_musicplay));
                         binder.play();
@@ -220,8 +236,10 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
 
     private class myConn implements ServiceConnection{
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder=(MusicService.MyBinder)service;
-            Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
+            //binder=(MusicService.MyBinder)service;
+///            Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
+            mServiceMessenger = new Messenger(binder);
+            mActivityMessenger=new Messenger(handler);
 
         }
         public void onServiceDisconnected(ComponentName name){

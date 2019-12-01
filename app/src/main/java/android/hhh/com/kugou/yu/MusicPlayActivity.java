@@ -59,14 +59,11 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         activityMusicPlay=(LinearLayout)findViewById(R.id.activity_music_play);
 
 
-        Bitmap bitmap= null;
+        /*Bitmap bitmap= null;
         try {
-            bitmap = BitmapFactory.decodeFile(binder.getTheSongInfo().getBackgroundImagePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bitmap = BitmapFactory.decodeFile(binder.getTheSongInfo().getBackgroundImagePath());
         Drawable bacgroundDrawable = new BitmapDrawable(getResources(), bitmap);
-        activityMusicPlay.setBackground(bacgroundDrawable);
+        activityMusicPlay.setBackground(bacgroundDrawable);*/
 
         backIBtn.setOnClickListener(this);
         lastSongBtn.setOnClickListener(this);
