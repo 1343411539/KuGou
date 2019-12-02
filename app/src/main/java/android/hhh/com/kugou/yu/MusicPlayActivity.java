@@ -73,12 +73,6 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         songNameTV=(TextView)findViewById(R.id.songName_TV);
         authorNameTV=(TextView)findViewById(R.id.authorName_TV);
 
-        try {
-            songNameTV.setText(binder.getTheSongInfo().getSongName());
-            authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 

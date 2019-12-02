@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Bundle;
@@ -41,6 +43,8 @@ import android.widget.Toast;
 //import com.google.android.gms.appindexing.Thing;
 //import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,14 +67,12 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private  TextView songNameTV;
     private  TextView authorNameTV;
     private Messenger mActivityMessenger;
-    //private Handler handler;
     private Messenger mServiceMessenger;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    //private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,14 +179,19 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
             //获取歌曲长度和当前播放位置，并设置到进度条上
             //设置歌名 歌手名
             //System.out.print(binder.toString());
-            msg.replyTo=mServiceMessenger;
+            //msg.replyTo=mServiceMessenger;
             if (msg.what==1) {
-                songNameTV.setText(bundle.getString("songName"));
-                authorNameTV.setText(bundle.getString("authorName"));
-                //设置圆图
-                Bitmap bitmap = BitmapFactory.decodeFile(bundle.getString("AlbumImage"));
-                Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
-                circleImageView.setImageDrawable(fengmianDrawable);
+                if(bundle==null) {
+                    Log.v("拉开距离快乐和客户", bundle.toString());
+                    songNameTV.setText(bundle.getString("songName"));
+                    authorNameTV.setText(bundle.getString("authorName"));
+                    //设置圆图
+                    File picture = new File(bundle.getString("AlbumImage"));
+                    Uri filepath = Uri.fromFile(picture);
+                    Bitmap bitmap = BitmapFactory.decodeFile(filepath.getPath());
+                    Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
+                    circleImageView.setImageDrawable(fengmianDrawable);
+                }
             }
             else if(msg.what==2){
 
@@ -233,14 +240,29 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 break;
         }
     }
+    public void reflashData(){
+        try {
+            Log.v("图片路径",binder.getTheSongInfo().getAlbumImagePath());
+            songNameTV.setText(binder.getTheSongInfo().getSongName());
+            authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
+            //设置圆图
+            File picture = new File(binder.getTheSongInfo().getAlbumImagePath());
+            Uri filepath = Uri.fromFile(picture);
+            Bitmap bitmap = BitmapFactory.decodeFile(filepath.getPath());
+            Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
+            circleImageView.setImageDrawable(fengmianDrawable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private class myConn implements ServiceConnection{
         public void onServiceConnected(ComponentName name, IBinder service) {
-            //binder=(MusicService.MyBinder)service;
-///            Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
-            mServiceMessenger = new Messenger(binder);
-            mActivityMessenger=new Messenger(handler);
-
+            binder=(MusicService.MyBinder)service;
+            Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
+            //mServiceMessenger = new Messenger(binder);
+            //mActivityMessenger=new Messenger(handler);
+            reflashData();
         }
         public void onServiceDisconnected(ComponentName name){
         }

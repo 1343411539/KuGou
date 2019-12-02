@@ -32,33 +32,35 @@ import java.util.TimerTask;
 public class MusicService extends Service {
     private static final  String TAG="MusicService";
     public MediaPlayer mediaPlayer;
-    private int point=0;
+    private int point;
     private InputStream is;
     private List<SongInfo> songInfos;
     private Messenger mActivityMessenger;
     private Messenger mServiceMessenger;
+    private MyBinder binder;
 
 
 
     public MusicService() throws IOException {
     }
-    public Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            //处理消息
-            Bundle bundle=msg.getData();
-            //获取歌曲长度和当前播放位置，并设置到进度条上
-            //设置歌名 歌手名
-            //System.out.print(binder.toString());
-            msg.replyTo=mActivityMessenger;
-
+    @Override
+    public void onCreate(){
+        super.onCreate();
+        binder=new MyBinder();
+        try {
+            point=0;
+            is=this.getAssets().open("music.json");
+            songInfos=SongInfoService.getInfosFromJson(is);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    };
+        Log.i("MusicService","创建服务");
+        Log.v("point+songName",point+","+songInfos.get(point).getSongName()+","+songInfos.get(point).getAuthorName()+","+songInfos.get(point).getBackgroundImagePath()+","+songInfos.get(point).getAlbumImagePath()+","+songInfos.get(point).getAudioFilePath());
+    }
 
     @Override
     public IBinder onBind(Intent intent){
-        Messenger messenger=new Messenger(handler);
-        return messenger.getBinder();
+        return this.binder;
     }
     public class MyBinder extends Binder{
         public List<SongInfo> getSongInfos() {
@@ -69,7 +71,6 @@ public class MusicService extends Service {
         }
         public SongInfo getTheSongInfo() throws IOException {
             Log.v("musicService","获取数据成功"+":"+songInfos.get(point).getSongName());
-            sendMes();
             return songInfos.get(point);
         }
         //播放音乐
@@ -149,7 +150,6 @@ public class MusicService extends Service {
                     ms.setData(bundle);
                     //发送消息
 
-                    handler.sendMessage(ms);
                 }
             };
             timer.schedule(task,300,500);
@@ -179,25 +179,11 @@ public class MusicService extends Service {
             bundle.putString("backgAlbumImage",songInfos.get(point).getAlbumImagePath());
             ms.setData(bundle);
             ms.what=1;
-            try {
-                mActivityMessenger.send(ms);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            MainActivity mainActivity=new MainActivity();
+            mainActivity.handler.sendMessage(ms);
         }
     }
-    @Override
-    public void onCreate(){
-        super.onCreate();
-        try {
-            is=this.getAssets().open("music.json");
-            songInfos=SongInfoService.getInfosFromJson(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.i("MusicService","创建服务");
-        Log.v("point+songName",point+","+songInfos.get(point).getSongName()+","+songInfos.get(point).getAuthorName()+","+songInfos.get(point).getBackgroundImagePath()+","+songInfos.get(point).getAlbumImagePath()+","+songInfos.get(point).getAudioFilePath());
-    }
+
 
 //获取音乐长度
     public int getMusicDuration()
