@@ -1,31 +1,24 @@
 package android.hhh.com.kugou;
 
 import android.content.Intent;
+import android.hhh.com.kugou.xiongli.utils.CopyContentUtil;
 import android.hhh.com.kugou.xiongli.utils.ToastUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class EditInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout portrait, nickname, sex, district, birthday, profession, signature,
-            hobbies, account, id, age , certification;
-/*    private LinearLayout nickname;
-    private LinearLayout sex;
-    private LinearLayout district;
-    private LinearLayout birthday;
-    private LinearLayout profession;
-    private LinearLayout signature;
-    private LinearLayout hobbies;
-    private LinearLayout account;
-    private LinearLayout id;
-    private LinearLayout age;
-    private LinearLayout certification;*/
+            hobbies, account, id, age, certification;
     private Intent intent;
     private Toolbar navigationIcon;
     private SexDialog dialog;
+    private TextView tv_account, tv_account_text, tv_id, tv_id_text;
+    private CopyContentUtil copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +67,15 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                 ToastUtils.showShort(EditInfoActivity.this, "点击兴趣爱好");
                 break;
             case R.id.ll_account:
-                ToastUtils.showShort(EditInfoActivity.this, "点击账号");
+//                ToastUtils.showShort(EditInfoActivity.this, "点击账号");
+                //传入需要复制的文字的控件
+                copy = new CopyContentUtil(getApplicationContext(), tv_account, tv_account_text);
+                copy.init();
                 break;
             case R.id.ll_kuGou_id:
                 ToastUtils.showShort(EditInfoActivity.this, "点击酷狗ID");
+                copy = new CopyContentUtil(getApplicationContext(), tv_id, tv_id_text);
+                copy.init();
                 break;
             case R.id.ll_age:
                 ToastUtils.showShort(EditInfoActivity.this, "点击乐龄");
@@ -91,7 +89,10 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
+        //ToolBar
         navigationIcon = (Toolbar) findViewById(R.id.toolbar_edit_info);
+
+        //LineaLayout
         portrait = (LinearLayout) findViewById(R.id.ll_head_portrait);
         nickname = (LinearLayout) findViewById(R.id.ll_nickname);
         sex = (LinearLayout) findViewById(R.id.ll_sex);
@@ -104,6 +105,12 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
         id = (LinearLayout) findViewById(R.id.ll_kuGou_id);
         age = (LinearLayout) findViewById(R.id.ll_age);
         certification = (LinearLayout) findViewById(R.id.ll_college_certification);
+
+        //TextView
+        tv_account = (TextView) findViewById(R.id.tv_account);
+        tv_account_text = (TextView) findViewById(R.id.tv_account_text);
+        tv_id = (TextView) findViewById(R.id.tv_id);
+        tv_id_text = (TextView) findViewById(R.id.tv_id_text);
     }
 
     private void setOnclick() {
