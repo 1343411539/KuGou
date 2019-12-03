@@ -49,6 +49,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,7 +264,9 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             //设置圆图
-            Bitmap bitmap = BitmapFactory.decodeStream(getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath()));
+            InputStream is=getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath());
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            is.close();
             Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
             circleImageView.setImageDrawable(fengmianDrawable);
         } catch (IOException e) {
@@ -343,4 +346,5 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
             return fragmentList.size();
         }
     }
+
 }

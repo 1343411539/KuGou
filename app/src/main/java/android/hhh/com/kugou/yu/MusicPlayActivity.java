@@ -166,7 +166,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     }
     public void reflashData(){
         try {
-            if (binder.isPlaying())
+            if (binder.getMediaPlayer()!=null&&binder.isPlaying())
                 musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_white));
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());

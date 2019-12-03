@@ -221,10 +221,10 @@ public class MusicService extends Service implements Serializable{
 
     //获取当前进度
     public int getCurrentProgress(){
-        if (mediaPlayer!=null&mediaPlayer.isPlaying()){
+        if (mediaPlayer!=null&&mediaPlayer.isPlaying()){
             return mediaPlayer.getCurrentPosition();
         }
-        else if (mediaPlayer!=null & (!mediaPlayer.isPlaying())){
+        else if (mediaPlayer!=null &&(!mediaPlayer.isPlaying())){
             return mediaPlayer.getCurrentPosition();
         }
         return 0;
