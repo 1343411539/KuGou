@@ -3,24 +3,27 @@
     "ID":1,
     "songName":"秋天不回来",
     "authorName":"王强",
-    "backgroundImagePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//song_background1.jpg",
-    "albumImagePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//album_fengmian1.jpg",
-    "audioFilePath":"C://Users/Administrator//Desktop//andriod//KuGou//app//src//main//assets//王强 - 秋天不回来 [mqms2].mp3"
+    "backgroundImagePath":"/res/drawable/song_background1.jpg",
+    "albumImagePath":"/res/drawable/album_fengmian1.jpg",
+    "audioFilePath":"王强 - 秋天不回来 [mqms2].mp3",
+    "duration":"3:26"
   },
   {
     "ID":2,
     "songName":"Have A Nice Day",
     "authorName":"Bon Jovi",
-    "backgroundImagePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//song_background2.jpg",
-    "albumImagePath":"C:////Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//album_fengmian2.jpg",
-    "audioFilePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//assets//Bon Jovi - Have A Nice Day [mqms2].mp3"
+    "backgroundImagePath":"/res/drawable/song_background2.jpg",
+    "albumImagePath":"/res/drawable/album_fengmian2.jpg",
+    "audioFilePath":"Bon Jovi - Have A Nice Day [mqms2].mp3",
+    "duration":"4:05"
   },
   {
     "ID":3,
     "songName":"Hymn For The Weekend",
     "authorName":"Alan Walker&Coldplay",
-    "backgroundImagePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//song_background3.jpg",
-    "albumImagePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//res//mipmap-mdpi//album_fengmian3.jpg",
-    "audioFilePath":"C://Users//Administrator//Desktop//andriod//KuGou//app//src//main//assets//Alan Walker&Coldplay - Hymn For The Weekend (Remi.mp3"
+    "backgroundImagePath":"/res/drawable/song_background3.jpg",
+    "albumImagePath":"/res/drawable/abum_fengmian3.jpg",
+    "audioFilePath":"Alan Walker&Coldplay - Hymn For The Weekend (Remi.mp3",
+    "duration":"3:21"
   }
 ]

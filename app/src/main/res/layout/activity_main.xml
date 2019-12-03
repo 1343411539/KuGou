@@ -14,7 +14,9 @@
         android:id="@+id/dl_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="android.hhh.com.kugou.MainActivity">
+        tools:context="android.hhh.com.kugou.MainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
     <LinearLayout
         android:fitsSystemWindows="true"
         android:id="@+id/activity_mains"
@@ -157,6 +159,7 @@
             android:id="@+id/songName_TV"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_alignLeft="@+id/playSeekBar"
             android:layout_alignTop="@+id/playSeekBar"
             android:layout_marginTop="10dp"
@@ -166,6 +169,7 @@
             android:id="@+id/authorName_TV"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_below="@+id/songName_TV"
             android:layout_alignLeft="@+id/playSeekBar"
             android:text="作者"

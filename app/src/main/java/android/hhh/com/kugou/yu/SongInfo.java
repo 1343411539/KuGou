@@ -11,6 +11,17 @@ public class SongInfo {
     private String backgroundImagePath;
     private String audioFilePath;
     private String albumImagePath;
+    private String duration;
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+
 
     public int getID() {
         return ID;
@@ -58,5 +69,6 @@ public class SongInfo {
     public void setBackgroundImagePath(String backgroundImagePath) {
         this.backgroundImagePath = backgroundImagePath;
     }
+
 
 }

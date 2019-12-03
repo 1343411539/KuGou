@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -34,6 +35,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.hhh.com.kugou.yu.*;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +47,14 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity implements  View.OnClickListener{
+public class MainActivity extends BaseActivity implements  View.OnClickListener,MusicService.Callback{
     private LinearLayout menuLayout;
     private FrameLayout searchLayout;
     private List<Fragment> fragmentList;
@@ -63,11 +66,12 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private  CircleImageView circleImageView;
     private Intent intent1;
     private  myConn conn;
+    private MusicService service1;
     MusicService.MyBinder binder;
     private  TextView songNameTV;
     private  TextView authorNameTV;
-    private Messenger mActivityMessenger;
-    private Messenger mServiceMessenger;
+    private static SeekBar seekBar;
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -105,6 +109,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(adapter);
 
+        seekBar=(SeekBar)findViewById(R.id.playSeekBar);
         meBtn =(Button)findViewById(R.id.me_btn);
         listenBtn=(Button)findViewById(R.id.listen_btn);
         lookBtn =(Button)findViewById(R.id.look_btn);
@@ -171,7 +176,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
 
     }
-    public Handler handler=new Handler(){
+    public static Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             //处理消息
@@ -181,19 +186,17 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
             //System.out.print(binder.toString());
             //msg.replyTo=mServiceMessenger;
             if (msg.what==1) {
-                if(bundle==null) {
-                    Log.v("拉开距离快乐和客户", bundle.toString());
-                    songNameTV.setText(bundle.getString("songName"));
-                    authorNameTV.setText(bundle.getString("authorName"));
-                    //设置圆图
-                    File picture = new File(bundle.getString("AlbumImage"));
-                    Uri filepath = Uri.fromFile(picture);
-                    Bitmap bitmap = BitmapFactory.decodeFile(filepath.getPath());
-                    Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
-                    circleImageView.setImageDrawable(fengmianDrawable);
-                }
+
             }
             else if(msg.what==2){
+
+                //获取歌曲长度和当前播放位置，并设置到进度条上
+                int duration=bundle.getInt("duration");
+                int currentposition=bundle.getInt("currentposition");
+                Log.i("tag","歌曲总长度"+duration);
+                Log.i("tag","当前长度"+currentposition);
+                seekBar.setMax(duration);
+                seekBar.setProgress(currentposition);
 
             }
 
@@ -215,17 +218,29 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 break;
             case R.id.circle_image:
                 Intent intent=new Intent(this,MusicPlayActivity.class);
-                intent.putExtra("binder",new Gson().toJson(binder));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("binder", binder);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             case R.id.musicplay_IBtn:
                 try {
                     if(!TextUtils.isEmpty(binder.getTheSongInfo().getAudioFilePath())){
-                        if(musicPlayBtn.getDrawable()==getResources().getDrawable(R.drawable.ic_musicplay))
-                            musicPlayBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause_black));
-                        else
-                            musicPlayBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_musicplay));
-                        binder.play();
+                        if(binder.getMediaPlayer()==null) {
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
+                            binder.play();
+                            Log.v("click","你点击了播放");
+                        }
+                        else if (binder.getMediaPlayer()!=null&&binder.isPlaying()==false){
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
+                            binder.goPlay();
+                            Log.v("click","你点击了播放");
+                        }
+                        else{
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay_black));
+                            Log.v("click","你点击了暂停");
+                            binder.pause();
+                        }
                     }else {
                         Toast.makeText(this,"找不到音乐文件",Toast.LENGTH_SHORT).show();
                     }
@@ -235,6 +250,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 break;
             case  R.id.nextsong_btn:
                 binder.next();
+                reflashData();
+                musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
                 break;
             default:
                 break;
@@ -246,9 +263,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             //设置圆图
-            File picture = new File(binder.getTheSongInfo().getAlbumImagePath());
-            Uri filepath = Uri.fromFile(picture);
-            Bitmap bitmap = BitmapFactory.decodeFile(filepath.getPath());
+            Bitmap bitmap = BitmapFactory.decodeStream(getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath()));
             Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
             circleImageView.setImageDrawable(fengmianDrawable);
         } catch (IOException e) {
@@ -259,12 +274,16 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private class myConn implements ServiceConnection{
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder=(MusicService.MyBinder)service;
+            service1=binder.getService();
+            service1.addCallback(MainActivity.this);
+
             Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
             //mServiceMessenger = new Messenger(binder);
             //mActivityMessenger=new Messenger(handler);
             reflashData();
         }
         public void onServiceDisconnected(ComponentName name){
+            service1=null;
         }
     }
 

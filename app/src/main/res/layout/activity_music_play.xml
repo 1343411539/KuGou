@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="歌曲名"
+                    android:maxLines="1"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"/>
             </LinearLayout>
@@ -67,6 +68,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:text="歌手名"
+        android:maxLines="1"
         android:textColor="@color/colorWhite"
         android:textSize="13sp"/>
     <LinearLayout
@@ -248,10 +250,11 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_yu_lingdang"/>
         <TextView
+            android:id="@+id/time_TV"
             android:layout_width="0dp"
             android:layout_weight="0.6"
             android:layout_height="match_parent"
-            android:text="0:02"
+            android:text="0:00"
             android:gravity="center"
             android:textSize="10sp"
             android:textColor="@color/colorWhite"/>
@@ -262,10 +265,9 @@
             android:layout_weight="4.6"
             android:background="@color/colorHui"
             android:layout_height="1.5dp"
-            android:layout_alignRight="@+id/bottom_Image"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp" />
+             />
         <TextView
+            android:id="@+id/duration_TV"
             android:layout_width="0dp"
             android:layout_weight="0.6"
             android:layout_height="match_parent"

@@ -3,12 +3,10 @@ package android.hhh.com.kugou.yu;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+
 import android.hhh.com.kugou.MainActivity;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Bundle;
@@ -21,6 +19,8 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,24 +29,36 @@ import java.util.TimerTask;
  * Created by Administrator on 2019/11/27 0027.
  */
 
-public class MusicService extends Service {
+public class MusicService extends Service implements Serializable{
     private static final  String TAG="MusicService";
     public MediaPlayer mediaPlayer;
     private int point;
     private InputStream is;
     private List<SongInfo> songInfos;
-    private Messenger mActivityMessenger;
-    private Messenger mServiceMessenger;
     private MyBinder binder;
+    public int time;
+    public int currentposition;
 
 
+    public interface Callback {
+}
 
+    /**
+     * 往回调接口集合中添加一个实现类
+     * @param callback
+     */
+    public void addCallback(Callback callback) {
+        list.add(callback);
+    }
+
+    private List<Callback> list;
     public MusicService() throws IOException {
     }
     @Override
     public void onCreate(){
         super.onCreate();
         binder=new MyBinder();
+        list = new ArrayList<Callback>();
         try {
             point=0;
             is=this.getAssets().open("music.json");
@@ -62,7 +74,7 @@ public class MusicService extends Service {
     public IBinder onBind(Intent intent){
         return this.binder;
     }
-    public class MyBinder extends Binder{
+    public class MyBinder extends Binder implements Serializable{
         public List<SongInfo> getSongInfos() {
             return songInfos;
         }
@@ -70,45 +82,49 @@ public class MusicService extends Service {
             return point;
         }
         public SongInfo getTheSongInfo() throws IOException {
+            Log.v("point", String.valueOf(point));
             Log.v("musicService","获取数据成功"+":"+songInfos.get(point).getSongName());
             return songInfos.get(point);
+        }
+        public MusicService getService(){
+            return MusicService.this;
         }
         //播放音乐
         public void play(){
             try{
-                if (mediaPlayer==null){
-                    //创建一个Mediaplayer播放器
-                    mediaPlayer=new MediaPlayer();
-                    //指定参数为音频文件
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                if (mediaPlayer==null)
+                    mediaPlayer=new MediaPlayer();//创建一个Mediaplayer播放器
+
+                mediaPlayer.reset();
+                time=0;
+                AssetManager assetMg =getAssets();
                     //指定播放路径
-                    mediaPlayer.setDataSource(songInfos.get(point).getAudioFilePath());
+                Log.v(TAG,"更换音乐");
+                AssetFileDescriptor fileDescriptor = assetMg.openFd(songInfos.get(point).getAudioFilePath());
+                mediaPlayer.setDataSource(fileDescriptor.getFileDescriptor(), fileDescriptor.getStartOffset(), fileDescriptor.getLength());
                     //准备播放
-                    mediaPlayer.prepare();
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                        public void onPrepared(MediaPlayer mp){
+                mediaPlayer.prepare();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+                    public void onPrepared(MediaPlayer mp){
                             //开始播放
                             mediaPlayer.start();
                         }
                     });
-                }else if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
-                    this.pause();
-
-                }
-                else if(mediaPlayer!=null&&!mediaPlayer.isPlaying()){
-                    int position = getCurrentProgress();
-                    mediaPlayer.seekTo(position);
-                    try{
-                        mediaPlayer.prepare();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    mediaPlayer.start();
-
-                }
+                seekPlayProgress();
             }catch (Exception e){
                 e.printStackTrace();
             }
+        }
+        public  void goPlay(){
+            int position = getCurrentProgress();
+            mediaPlayer.seekTo(position);
+            try{
+                mediaPlayer.prepare();
+            }catch (Exception e){
+                    e.printStackTrace();
+            }
+            mediaPlayer.start();
+            seekPlayProgress();
         }
         public void pause(){
             if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
@@ -118,19 +134,27 @@ public class MusicService extends Service {
             }
         }
         public void next() {
-            point = point == songInfos.size() - 1 ? 0 : point + 1;
+            if(point == songInfos.size() - 1)
+                point=0;
+            else  point++;
             play();
-            sendMes();
         }
 
         public void last() {
-            point = point == 0 ? songInfos.size() - 1 : point - 1;
+            if(point == 0)
+                point=songInfos.size()-1;
+            else  point--;
             play();
-            sendMes();
+        }
+        public boolean isPlaying(){
+            return mediaPlayer.isPlaying();
+        }
+        public MediaPlayer getMediaPlayer(){
+            return mediaPlayer;
         }
         public void seekPlayProgress(){
      /*1.获取当前歌曲的总时长*/
-            final int duration=mediaPlayer.getDuration();
+            final int duration=getMusicDuration();
 
             //计时器对象
             final Timer timer=new Timer();
@@ -138,30 +162,40 @@ public class MusicService extends Service {
                 @Override
                 public void run() {
                     //开启线程定时获取当前播放进度
-                    int currentposition=mediaPlayer.getCurrentPosition();
+                    if (mediaPlayer==null||mediaPlayer.isPlaying()==false)
+                    {
+                        timer.cancel();
+                        Log.i("tag","取消计时任务");
+                    }
+                    currentposition=getCurrentProgress();
                     //利用message给主线程发消息更新seekbar进度
                     Message ms=Message.obtain();
+                    Message ms2=Message.obtain();
                     Bundle bundle=new Bundle();
+                    Bundle bundle2=new Bundle();
                     bundle.putInt("duration",duration);
+                    bundle2.putInt("duration",duration);
                     Log.i("tag","歌曲总长度"+duration);
                     bundle.putInt("currentposition",currentposition);
+                    bundle2.putInt("currentposition",currentposition);
                     Log.i("tag","当前长度"+currentposition);
+                    time++;
+                    bundle.putInt("time",time);
+                    bundle2.putInt("time",time);
+                    Log.i("tag","已播放时间"+time);
                     //设置发送的消息内容
                     ms.setData(bundle);
+                    ms2.setData(bundle);
+                    ms2.what=2;
+                    ms.what=2;
                     //发送消息
+                    MainActivity.handler.sendMessage(ms);
+                    // MusicPlayActivity.handler.sendMessage(ms);
 
                 }
             };
-            timer.schedule(task,300,500);
+            timer.schedule(task,1000,1000);
             //当播放结束时停止播放
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    Log.i("tag","取消计时任务");
-                    timer.cancel();
-                    task.cancel();
-                }
-            });
 
         }
         public void stop() {
@@ -169,18 +203,6 @@ public class MusicService extends Service {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
             }
-        }
-        public void sendMes(){
-            Message ms=Message.obtain();
-            Bundle bundle=new Bundle();
-            bundle.putString("songName",songInfos.get(point).getSongName());
-            bundle.putString("authorName",songInfos.get(point).getAuthorName());
-            bundle.putString("backgrondImage",songInfos.get(point).getBackgroundImagePath());
-            bundle.putString("backgAlbumImage",songInfos.get(point).getAlbumImagePath());
-            ms.setData(bundle);
-            ms.what=1;
-            MainActivity mainActivity=new MainActivity();
-            mainActivity.handler.sendMessage(ms);
         }
     }
 
