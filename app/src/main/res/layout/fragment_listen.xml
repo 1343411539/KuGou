@@ -247,14 +247,14 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/iv"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_music"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:divider="#d9d9d9"
+                android:divider="#000"
                 android:dividerHeight="1dp">
-            </ListView>
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

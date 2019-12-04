@@ -2,16 +2,27 @@ package android.hhh.com.kugou;
 
 import android.content.Context;
 import android.content.Intent;
+
+import android.hhh.com.kugou.huang.SearchList;
 import android.hhh.com.kugou.wangsong.Love;
+
 import android.hhh.com.kugou.wangsong.MusicLibrary;
+import android.hhh.com.kugou.wangsong.MusicListAdapter;
 import android.hhh.com.kugou.wangsong.SongSheet;
+
+import android.hhh.com.kugou.yu.SongInfo;
+import android.hhh.com.kugou.yu.SongInfoService;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -19,7 +30,10 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -29,6 +43,10 @@ public class ListenFragment extends android.support.v4.app.Fragment {
     private View mView;
     private Banner banner;
     private ImageButton musiclibrary_ib, songsheet_ib, love_ib;
+    private InputStream is;
+    private List<SongInfo> songInfos;
+    private List<SearchList> searchLists = new ArrayList<>();
+    private RecyclerView mRvSearch;
 
     public ListenFragment() {
         // Required empty public constructor
@@ -44,12 +62,12 @@ public class ListenFragment extends android.support.v4.app.Fragment {
 
         initView();//按钮点击事件
 
+        getSearch(mView);
         return mView;
     }
 
     public void setView() {
         banner = mView.findViewById(R.id.banner);
-
         ArrayList<Integer> imgs = new ArrayList<>();
         imgs.add(R.drawable.background1);
         imgs.add(R.drawable.background2);
@@ -108,6 +126,7 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         songsheet_ib.setOnClickListener(new ButtonListener());
         love_ib=mView.findViewById(R.id.love_ib);
         love_ib.setOnClickListener(new ButtonListener());
+        mRvSearch=mView.findViewById(R.id.rv_music);
 
     }
 
@@ -128,5 +147,23 @@ public class ListenFragment extends android.support.v4.app.Fragment {
             }
         }
     }
+    public void getSearch(View v){
+        try {
+            is = getContext().getAssets().open("music.json");
+            songInfos = SongInfoService.getInfosFromJson(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+
+        for(int i = 0; i<songInfos.size(); i++){
+            SearchList searchList = new SearchList(songInfos.get(i).getSongName(), songInfos.get(i).getAuthorName());
+            searchLists.add(searchList);
+        }
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());//activity中使用this,fragment中使用getContext()
+        mRvSearch.setLayoutManager(layoutManager);
+        MusicListAdapter iconAdapter = new MusicListAdapter(searchLists);
+        mRvSearch.setAdapter(iconAdapter);
+    }
 }
