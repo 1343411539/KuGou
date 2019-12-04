@@ -2,30 +2,35 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape >
-            <!-- 开始颜色="" 结束颜色="" 颜色渐变="" -->
-            <gradient android:angle="270" android:endColor="#888888" android:startColor="#888888" />
-            <!-- 渐变方向 按钮边缘="" 边缘宽="" -->
+            <!--android:angle是渐变角度-->
+            <!--android:angle＝“0”时，是从左到右，按照开始颜色到结束颜色来渲染的-->
+            <!--android:angle＝“90”是从下到上来渲染的-->
+            <!--android:angle＝“270”是从上到下来渲染的-->
+            <!--android:angle＝“180”是从右到左来渲染的-->
+            <!-- 渐变方向="" 起始颜色="" 结束颜色="" -->
+            <gradient android:angle="0" android:startColor="#e6e6e6" android:endColor="#888888" />
+            <!-- 边框宽度="" 边框颜色="" -->
             <stroke android:width="1sp" android:color="#7d5a7d" />
-            <!-- 边缘颜色 按钮四个圆角="" -->
-            <corners android:radius="30dp" />
-            <!-- 半径 内边距="" 按钮文字和边缘距离="" -->
+            <!-- 按钮四个圆角="" -->
+            <corners android:radius="10dp" />
+            <!-- 按钮文字和边缘距离="" -->
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
         </shape>
     </item>
     <item android:state_focused="true">
         <shape>
-            <gradient android:angle="270" android:endColor="#7d5a7d" android:startColor="#7d5a7d" />
-            <stroke android:width="1sp" android:color="#dcdcdc" />
-            <corners android:radius="30dp" />
+            <gradient android:angle="0" android:startColor="#e6e6e6" android:endColor="#888888" />
+            <stroke android:width="1sp" android:color="#7d5a7d" />
+            <corners android:radius="10dp" />
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
         </shape>
     </item>
     <item>
         <shape>
-            <gradient android:angle="270" android:endColor="#00000000" android:startColor="#00000000" />
+            <gradient android:angle="0" android:startColor="#82fff5" android:endColor="#54ccff" />
             <stroke android:width="1sp" android:color="#7d5a7d" />
-            <corners android:radius="30dp" />
+            <corners android:radius="10dp" />
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
-        </shape>
+    </shape>
     </item>
 </selector>
