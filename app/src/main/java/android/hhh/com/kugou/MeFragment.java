@@ -1,5 +1,6 @@
 package android.hhh.com.kugou;
 
+import android.content.Intent;
 import android.hhh.com.kugou.xiongli.utils.ToastUtils;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private View button;
     private ImageView upDown;
     private boolean isHide = true;// 自建歌单 列表 是否是隐藏的，默认为true
+    private ImageView portrait;
 
     @Nullable
     @Override
@@ -50,7 +52,11 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_head_portrait:
+                startActivity(new Intent(getActivity(), InformationActivity.class));
+                break;
             case R.id.ll_head:
+                startActivity(new Intent(getActivity(), InformationActivity.class));
                 break;
             case R.id.ll_local:
                 break;
@@ -97,6 +103,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         menuList.setOnClickListener(this);
         generalize.setOnClickListener(this);
         button.setOnClickListener(this);
+        portrait.setOnClickListener(this);//touxiang
     }
 
     private void initView() {
@@ -114,6 +121,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
         //初始化ImageView控件
         upDown = getActivity().findViewById(R.id.iv_down_up);
+        portrait = getActivity().findViewById(R.id.iv_head_portrait);
 
         //初始化Button控件
         button = getActivity().findViewById(R.id.btn_user_defined);

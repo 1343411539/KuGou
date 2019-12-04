@@ -14,5 +14,4 @@
     <color name="settingWhite">#ffffff</color>
     <color name="notChecked">#20000000</color>
     <color name="isChecked">#20ffffff</color>
-
 </resources>

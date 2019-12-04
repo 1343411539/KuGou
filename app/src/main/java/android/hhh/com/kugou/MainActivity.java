@@ -1,38 +1,61 @@
 package android.hhh.com.kugou;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.Messenger;
+import android.view.View;
+
+
+
+
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
-import android.os.IBinder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.hhh.com.kugou.yu.*;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+
+//import com.google.android.gms.appindexing.Action;
+//import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.Thing;
+//import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity implements  View.OnClickListener{
+public class MainActivity extends BaseActivity implements  View.OnClickListener,MusicService.Callback{
     private LinearLayout menuLayout;
     private FrameLayout searchLayout;
     private List<Fragment> fragmentList;
@@ -40,23 +63,33 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
     private Button meBtn;
     private Button listenBtn;
     private Button lookBtn;
-    private CircleImageView circleImageView;
+    private ImageButton musicPlayBtn;
+    private  CircleImageView circleImageView;
     private Intent intent1;
-    private  String path;
     private  myConn conn;
+    private MusicService service1;
     MusicService.MyBinder binder;
+    private  TextView songNameTV;
+    private  TextView authorNameTV;
+    private static SeekBar seekBar;
 
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //绑定服;
+        Log.v("hhhhhh","运行到这里了");
+        conn =new myConn();
+        intent1 =new Intent(this,MusicService.class);
+        bindService(intent1,conn, BIND_AUTO_CREATE);
+        Log.v("hhhh","绑定服务？？");
+
         //动态设置 menuLayout和searchLayout 的大小
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int screenWidth = dm.widthPixels;
@@ -77,13 +110,20 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(adapter);
 
+        seekBar=(SeekBar)findViewById(R.id.playSeekBar);
         meBtn =(Button)findViewById(R.id.me_btn);
         listenBtn=(Button)findViewById(R.id.listen_btn);
         lookBtn =(Button)findViewById(R.id.look_btn);
         circleImageView=(CircleImageView)findViewById(R.id.circle_image);
+        musicPlayBtn=(ImageButton)findViewById(R.id.musicplay_IBtn);
+        songNameTV=(TextView)findViewById(R.id.songName_TV);
+        authorNameTV=(TextView)findViewById(R.id.authorName_TV);
+
         meBtn.setTextSize(30);
         meBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         meBtn.setTextColor(Color.WHITE);
+
+        musicPlayBtn.setOnClickListener(this);
         meBtn.setOnClickListener(this);
         listenBtn.setOnClickListener(this);
         lookBtn.setOnClickListener(this);
@@ -91,7 +131,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         //页面滑动事件
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -133,14 +173,37 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
 
             }
         });
-        //音乐播放
-        path="ssssssss";
         findViewById(R.id.musicplay_IBtn).setOnClickListener(this);
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
-        conn =new myConn();
-        intent1 =new Intent(this,MusicService.class);
-        bindService(intent1,conn,BIND_AUTO_CREATE);
+
     }
+    public static Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            //处理消息
+            Bundle bundle=msg.getData();
+            //获取歌曲长度和当前播放位置，并设置到进度条上
+            //设置歌名 歌手名
+            //System.out.print(binder.toString());
+            //msg.replyTo=mServiceMessenger;
+            if (msg.what==1) {
+
+            }
+            else if(msg.what==2){
+
+                //获取歌曲长度和当前播放位置，并设置到进度条上
+                int duration=bundle.getInt("duration");
+                int currentposition=bundle.getInt("currentposition");
+                Log.i("tag","歌曲总长度"+duration);
+                Log.i("tag","当前长度"+currentposition);
+                seekBar.setMax(duration);
+                seekBar.setProgress(currentposition);
+
+            }
+
+
+        }
+    };
     @Override
     public  void  onClick(View v){
         switch (v.getId()){
@@ -156,35 +219,74 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 break;
             case R.id.circle_image:
                 Intent intent=new Intent(this,MusicPlayActivity.class);
-                //数据封装
-                SongInfo songInfo=new SongInfo();
-                songInfo.setSongName("秋天不回来");
-                songInfo.setAuthorName("熊丽");
-                songInfo.setAlbumImagePath("");
-                songInfo.setBackgroundImagePath("");
-                songInfo.setAudioFilePath("");
-                intent.putExtra("songInfo",new Gson().toJson(songInfo));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("binder", binder);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             case R.id.musicplay_IBtn:
-                if(!TextUtils.isEmpty(path)){
-                    binder.play(path);
-                }else {
-                    Toast.makeText(this,"找不到音乐文件",Toast.LENGTH_SHORT).show();
+                try {
+                    if(!TextUtils.isEmpty(binder.getTheSongInfo().getAudioFilePath())){
+                        if(binder.getMediaPlayer()==null) {
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
+                            binder.play();
+                            Log.v("click","你点击了播放");
+                        }
+                        else if (binder.getMediaPlayer()!=null&&binder.isPlaying()==false){
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
+                            binder.goPlay();
+                            Log.v("click","你点击了播放");
+                        }
+                        else{
+                            musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay_black));
+                            Log.v("click","你点击了暂停");
+                            binder.pause();
+                        }
+                    }else {
+                        Toast.makeText(this,"找不到音乐文件",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case  R.id.nextsong_btn:
+                binder.next();
+                reflashData();
+                musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
                 break;
             default:
                 break;
         }
     }
+    public void reflashData(){
+        try {
+            Log.v("图片路径",binder.getTheSongInfo().getAlbumImagePath());
+            songNameTV.setText(binder.getTheSongInfo().getSongName());
+            authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
+            //设置圆图
+            InputStream is=getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath());
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+            Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
+            circleImageView.setImageDrawable(fengmianDrawable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private class myConn implements ServiceConnection{
-        public void onServiceConnected(ComponentName name, IBinder service){
+        public void onServiceConnected(ComponentName name, IBinder service) {
             binder=(MusicService.MyBinder)service;
+            service1=binder.getService();
+            service1.addCallback(MainActivity.this);
+
+            Log.v("MainActivity","服务成功绑定，内存地址为："+binder.toString());
+            //mServiceMessenger = new Messenger(binder);
+            //mActivityMessenger=new Messenger(handler);
+            reflashData();
         }
         public void onServiceDisconnected(ComponentName name){
+            service1=null;
         }
     }
 
@@ -197,7 +299,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    public Action getIndexApiAction() {
+    /*public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Main Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
@@ -207,8 +309,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
                 .setObject(object)
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
                 .build();
-    }
-    @Override
+    }*/
+    /*@Override
     public void onStart() {
         super.onStart();
 
@@ -216,9 +318,9 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onStop() {
         super.onStop();
 
@@ -226,7 +328,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
-    }
+    }*/
 
     public class FragAdapter extends FragmentPagerAdapter {
         public FragAdapter(FragmentManager fm, List<Fragment> fragments) {
@@ -244,4 +346,5 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener{
             return fragmentList.size();
         }
     }
+
 }

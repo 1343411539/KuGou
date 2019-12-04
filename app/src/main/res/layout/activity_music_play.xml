@@ -4,6 +4,8 @@
     android:id="@+id/activity_music_play"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="16dp"
@@ -16,6 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageButton
+                android:id="@+id/back_IBtn"
                 android:layout_weight="4"
                 android:scaleType="fitStart"
                 android:scaleY="0.8"
@@ -35,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="歌曲名"
+                    android:maxLines="1"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"/>
             </LinearLayout>
@@ -64,6 +68,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:text="歌手名"
+        android:maxLines="1"
         android:textColor="@color/colorWhite"
         android:textSize="13sp"/>
     <LinearLayout
@@ -245,10 +250,11 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_yu_lingdang"/>
         <TextView
+            android:id="@+id/time_TV"
             android:layout_width="0dp"
             android:layout_weight="0.6"
             android:layout_height="match_parent"
-            android:text="0:02"
+            android:text="0:00"
             android:gravity="center"
             android:textSize="10sp"
             android:textColor="@color/colorWhite"/>
@@ -259,10 +265,9 @@
             android:layout_weight="4.6"
             android:background="@color/colorHui"
             android:layout_height="1.5dp"
-            android:layout_alignRight="@+id/bottom_Image"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp" />
+             />
         <TextView
+            android:id="@+id/duration_TV"
             android:layout_width="0dp"
             android:layout_weight="0.6"
             android:layout_height="match_parent"
@@ -298,6 +303,7 @@
             android:layout_height="match_parent"
             android:gravity="center">
         <ImageButton
+            android:id="@+id/lastsong_btn"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/ic_lastsong"
@@ -311,6 +317,7 @@
             android:layout_height="match_parent"
             android:gravity="center">
         <ImageButton
+            android:id="@+id/musicplay_IBtn"
             android:layout_width="40dp"
             android:scaleX="1.1"
             android:scaleY="1.1"
@@ -324,6 +331,7 @@
             android:layout_height="match_parent"
             android:gravity="center">
         <ImageButton
+            android:id="@+id/nextsong_btn"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleX="0.9"
