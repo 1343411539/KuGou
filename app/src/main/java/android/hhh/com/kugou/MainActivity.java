@@ -1,29 +1,19 @@
 package android.hhh.com.kugou;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.hhh.com.kugou.huang.SettingActivity;
-import android.net.Uri;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Bundle;
-import android.os.Message;
-import android.os.Messenger;
-import android.view.View;
-
-
-
-
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hhh.com.kugou.huang.SettingActivity;
+import android.hhh.com.kugou.yu.MusicPlayActivity;
+import android.hhh.com.kugou.yu.MusicService;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -31,24 +21,15 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.hhh.com.kugou.yu.*;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-//import com.google.android.gms.appindexing.Action;
-//import com.google.android.gms.appindexing.AppIndex;
-//import com.google.android.gms.appindexing.Thing;
-//import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.gson.Gson;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -57,6 +38,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+//import com.google.android.gms.appindexing.Action;
+//import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.Thing;
+//import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends BaseActivity implements  View.OnClickListener,MusicService.Callback{
     private LinearLayout menuLayout;
@@ -374,5 +360,10 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
     public void openSetting(View v){
         Intent newSet = new Intent(MainActivity.this , SettingActivity.class);
         startActivity(newSet);
+    }
+
+    public void newSearch(View v){
+        Intent intent = new Intent(MainActivity.this , SearchActivity.class);
+        startActivity(intent);
     }
 }
