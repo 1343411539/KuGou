@@ -94,6 +94,7 @@ public class MusicService extends Service implements Serializable{
             try{
                 if (mediaPlayer==null)
                     mediaPlayer=new MediaPlayer();//创建一个Mediaplayer播放器
+                else
 
                 mediaPlayer.reset();
                 time=0;
@@ -146,6 +147,7 @@ public class MusicService extends Service implements Serializable{
             else  point--;
             play();
         }
+        public boolean MPActivityIsCreated;
         public boolean isPlaying(){
             return mediaPlayer.isPlaying();
         }
@@ -189,9 +191,9 @@ public class MusicService extends Service implements Serializable{
                     ms2.what=2;
                     ms.what=2;
                     //发送消息
-                    MainActivity.handler.sendMessage(ms);
-                    // MusicPlayActivity.handler.sendMessage(ms);
-
+                   // MainActivity.handler.sendMessage(ms);
+                    if (MPActivityIsCreated)
+                        MusicPlayActivity.handler.sendMessage(ms);
                 }
             };
             timer.schedule(task,1000,1000);
