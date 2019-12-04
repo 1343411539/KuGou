@@ -191,11 +191,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
                 //开启线程定时获取当前播放进度
                 int duration=binder.getService().getMusicDuration();
                 int currentposition = binder.getService().getCurrentProgress();
-                Log.i("tag", "当前长度" + currentposition);
-                int s=binder.getService().time;
-                int m=s/60;
-                s=s%60;
-                //timeTV.setText(m+":"+s);
+                Log.i("tag", "当前进度" + currentposition);
                 seekBar.setMax(duration);
                 seekBar.setProgress(currentposition);
             }

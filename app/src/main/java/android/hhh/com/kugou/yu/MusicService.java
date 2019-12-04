@@ -108,10 +108,10 @@ public class MusicService extends Service implements Serializable{
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
                     public void onPrepared(MediaPlayer mp){
                             //开始播放
-                            mediaPlayer.start();
-                        }
-                    });
-                seekPlayProgress();
+                        mediaPlayer.start();
+                        seekPlayProgress();
+                    }
+                });
             }catch (Exception e){
                 e.printStackTrace();
             }
