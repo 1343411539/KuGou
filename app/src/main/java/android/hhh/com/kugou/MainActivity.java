@@ -64,17 +64,22 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
     private InputStream is;
     private Bitmap bitmap;
     private Timer timer;
-
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    private String name;
+    private String password;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        intent = getIntent();
+        name = intent.getStringExtra("name");
+        if( !(name==null || name=="") ) {
+            Toast.makeText(this, "欢迎" + name, Toast.LENGTH_SHORT).show();
+        }
+
+
         //绑定服;
         Log.v("hhhhhh","运行到这里了");
         conn =new myConn();
@@ -359,6 +364,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
 
     public void openSetting(View v){
         Intent newSet = new Intent(MainActivity.this , SettingActivity.class);
+        newSet.putExtra("name", name);
         startActivity(newSet);
     }
 

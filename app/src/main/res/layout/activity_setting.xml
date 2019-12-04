@@ -373,6 +373,34 @@
                         android:background="#20000000"
                         android:foreground="?attr/selectableItemBackground">
                         <TextView
+                            android:id="@+id/tv_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="退出登录"
+                            android:textColor="@color/settingWhite"
+                            android:onClick="newEnd"
+                            android:textSize="18dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:paddingLeft="20dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrowheadright" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ly_setting_item_12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        android:background="#20000000"
+                        android:foreground="?attr/selectableItemBackground">
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="关于KuGou音乐"
