@@ -41,7 +41,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     private TextView songNameTV;
     private TextView authorNameTV;
     private TextView durationTV;
-    private SeekBar seekBar;
+    private static SeekBar seekBar;
 
     private ImageButton lastSongBtn;
     private ImageButton musicPlayBtn;
@@ -49,30 +49,42 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     private ImageButton backIBtn;
     private LinearLayout activityMusicPlay;
     MusicService.MyBinder binder;
-    private Timer timer;
 
-    public void seekPlayProgress(){
-        //计时器对象
-        timer=new Timer();
-        final TimerTask task=new TimerTask() {
-            @Override
-            public void run() {
-                //开启线程定时获取当前播放进度
-                int duration=binder.getService().getMusicDuration();
-                int currentposition = binder.getService().getCurrentProgress();
-                Log.i("tag", "当前长度" + currentposition);
-                int s=binder.getService().time;
+    private InputStream is;
+    private Bitmap bitmap;
+    private static TextView timeTV;
+
+    public static Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            //处理消息
+            Bundle bundle=msg.getData();
+            //获取歌曲长度和当前播放位置，并设置到进度条上
+            //设置歌名 歌手名
+            //System.out.print(binder.toString());
+            //msg.replyTo=mServiceMessenger;
+            if (msg.what==1) {
+
+            }
+            else if(msg.what==2){
+
+                //获取歌曲长度和当前播放位置，并设置到进度条上
+                int duration=bundle.getInt("duration");
+                int currentposition=bundle.getInt("currentposition");
+                int s=bundle.getInt("time");
                 int m=s/60;
                 s=s%60;
-                //timeTV.setText(m+":"+s);
+                Log.i("tag","歌曲总长度"+duration);
+                Log.i("tag","当前长度"+currentposition);
                 seekBar.setMax(duration);
                 seekBar.setProgress(currentposition);
-            }
-        };
-        timer.schedule(task,1000,1000);
-        //当播放结束时停止播放
+                timeTV.setText(m+":"+s);
 
-    }
+            }
+
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +103,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         activityMusicPlay=(LinearLayout)findViewById(R.id.activity_music_play);
         durationTV=(TextView) findViewById(R.id.duration_TV);
         seekBar=(SeekBar)findViewById(R.id.playSeekBar);
+        timeTV=(TextView)findViewById(R.id.time_TV);
 
         /*Bitmap bitmap= null;
         try {
@@ -107,7 +120,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         authorNameTV=(TextView)findViewById(R.id.authorName_TV);
         //
         reflashData();
-        seekPlayProgress();
+        //seekPlayProgress();
 
 
 
@@ -129,18 +142,18 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_white));
                             binder.play();
                             Log.v("click","你点击了播放");
-                            seekPlayProgress();
+                            //seekPlayProgress();
                         }
                         else if (binder.getMediaPlayer()!=null&&binder.isPlaying()==false){
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_white));
                             binder.goPlay();
                             Log.v("click","你点击了播放");
-                            seekPlayProgress();
+                            //seekPlayProgress();
                         }
                         else{
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay));
                             Log.v("click","你点击了暂停");
-                            timer.cancel();
+                           // timer.cancel();
                             binder.pause();
 
                         }
@@ -172,8 +185,10 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             durationTV.setText(binder.getTheSongInfo().getDuration());
             //设置beijing图
-            InputStream is=getClass().getResourceAsStream(binder.getTheSongInfo().getBackgroundImagePath());
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            binder.MPActivityIsCreated=true;
+
+            is=getClass().getResourceAsStream(binder.getTheSongInfo().getBackgroundImagePath());
+            bitmap = BitmapFactory.decodeStream(is);
             is.close();
             Drawable BackgroundDrawable = new BitmapDrawable(bitmap);
 

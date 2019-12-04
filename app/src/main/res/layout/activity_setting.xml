@@ -344,10 +344,12 @@
                         android:background="#20000000"
                         android:foreground="?attr/selectableItemBackground">
                         <TextView
+                            android:id="@+id/tv_login"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="歌曲下载目录"
+                            android:text="用户登录"
                             android:textColor="@color/settingWhite"
+                            android:onClick="newLogin"
                             android:textSize="18dp"
                             android:paddingTop="15dp"
                             android:paddingBottom="15dp"

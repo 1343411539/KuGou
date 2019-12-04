@@ -8,6 +8,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorTouMing">#00000000</color>
     <color name="colorHui">#8c8888</color>
+    <color name="btnNotChecked">#3C8DC4</color>
+    <color name="btnIsChecked">#803C8DC4</color>
     >>>>>>> Stashed changes
     <color name="colorDivider">#d8d8d8</color>
     <color name="colorView">#eeeeee</color>
