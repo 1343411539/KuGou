@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     DBOpenHelper mDBOpenHelper;
     Button btnLogin;
     Button btnRegister;
+    String name;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         User user = data.get(i);
                         if (name.equals(user.getName()) && password.equals(user.getPassword())) {
                             match = true;
+                            name = user.getName();
+                            password = user.getPassword();
                             break;
                         } else {
                             match = false;
@@ -100,6 +104,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (match) {
                         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, MainActivity.class);
+                        intent.putExtra("name", name);
+                        intent.putExtra("password", password);
                         startActivity(intent);
                         finish();//销毁此Activity
                     } else {
