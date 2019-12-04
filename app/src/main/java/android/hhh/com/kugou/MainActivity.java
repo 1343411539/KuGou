@@ -52,6 +52,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -72,6 +74,9 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
     private  TextView songNameTV;
     private  TextView authorNameTV;
     private static SeekBar seekBar;
+    private InputStream is;
+    private Bitmap bitmap;
+    private Timer timer;
 
 
     /**
@@ -177,33 +182,29 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
         findViewById(R.id.nextsong_btn).setOnClickListener(this);
 
     }
-    public static Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            //处理消息
-            Bundle bundle=msg.getData();
-            //获取歌曲长度和当前播放位置，并设置到进度条上
-            //设置歌名 歌手名
-            //System.out.print(binder.toString());
-            //msg.replyTo=mServiceMessenger;
-            if (msg.what==1) {
-
-            }
-            else if(msg.what==2){
-
-                //获取歌曲长度和当前播放位置，并设置到进度条上
-                int duration=bundle.getInt("duration");
-                int currentposition=bundle.getInt("currentposition");
-                Log.i("tag","歌曲总长度"+duration);
-                Log.i("tag","当前长度"+currentposition);
+    public void seekPlayProgress(){
+        //计时器对象
+        timer=new Timer();
+        final TimerTask task=new TimerTask() {
+            @Override
+            public void run() {
+                //开启线程定时获取当前播放进度
+                int duration=binder.getService().getMusicDuration();
+                int currentposition = binder.getService().getCurrentProgress();
+                Log.i("tag", "当前长度" + currentposition);
+                int s=binder.getService().time;
+                int m=s/60;
+                s=s%60;
+                //timeTV.setText(m+":"+s);
                 seekBar.setMax(duration);
                 seekBar.setProgress(currentposition);
-
             }
+        };
+        timer.schedule(task,1000,1000);
+        //当播放结束时停止播放
 
+    }
 
-        }
-    };
     @Override
     public  void  onClick(View v){
         switch (v.getId()){
@@ -230,16 +231,19 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
                         if(binder.getMediaPlayer()==null) {
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
                             binder.play();
+                            seekPlayProgress();
                             Log.v("click","你点击了播放");
                         }
                         else if (binder.getMediaPlayer()!=null&&binder.isPlaying()==false){
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
                             binder.goPlay();
+                            seekPlayProgress();
                             Log.v("click","你点击了播放");
                         }
                         else{
                             musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay_black));
                             Log.v("click","你点击了暂停");
+                            timer.cancel();
                             binder.pause();
                         }
                     }else {
@@ -251,6 +255,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
                 break;
             case  R.id.nextsong_btn:
                 binder.next();
+                seekPlayProgress();
                 reflashData();
                 musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
                 break;
@@ -264,11 +269,21 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
             songNameTV.setText(binder.getTheSongInfo().getSongName());
             authorNameTV.setText(binder.getTheSongInfo().getAuthorName());
             //设置圆图
-            InputStream is=getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath());
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            is=getClass().getResourceAsStream(binder.getTheSongInfo().getAlbumImagePath());
+            bitmap = BitmapFactory.decodeStream(is);
             is.close();
             Drawable fengmianDrawable = new BitmapDrawable(getResources(), bitmap);
             circleImageView.setImageDrawable(fengmianDrawable);
+            if(binder.getMediaPlayer()!=null){
+                if(binder.isPlaying()){
+                    seekPlayProgress();
+                    musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_pause_black));
+                }
+                else
+                    musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay_black));
+            }
+            else
+                musicPlayBtn.setImageDrawable(getDrawable(R.drawable.ic_musicplay_black));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -345,6 +360,18 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
         public int getCount() {
             return fragmentList.size();
         }
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
+        if(binder!=null)
+            reflashData();
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(binder!=null)
+            reflashData();
     }
 
 }

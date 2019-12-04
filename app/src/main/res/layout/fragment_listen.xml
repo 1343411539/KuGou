@@ -49,10 +49,10 @@
                         <ImageButton
                             android:id="@+id/musiclibrary_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/musiclibrary" />
+                            android:background="@drawable/ic_musiclibrary" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -72,10 +72,10 @@
                         <ImageButton
                             android:id="@+id/songsheet_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/songsheet" />
+                            android:background="@drawable/ic_songsheet" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -95,10 +95,10 @@
                         <ImageButton
                             android:id="@+id/radiostation_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/radiostation" />
+                            android:background="@drawable/ic_radiostation" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -125,10 +125,10 @@
                         <ImageButton
                             android:id="@+id/love_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/love" />
+                            android:background="@drawable/ic_love" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -148,10 +148,10 @@
                         <ImageButton
                             android:id="@+id/recommenddaily_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/recommenddaily" />
+                            android:background="@drawable/ic_recommenddaily" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -171,10 +171,10 @@
                         <ImageButton
                             android:id="@+id/more_ib"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="150dp"
+                            android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:scaleType="fitXY"
-                            android:background="@drawable/more" />
+                            android:background="@drawable/ic_more" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -186,6 +186,7 @@
                 </TableRow>
 
             </TableLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -245,6 +246,16 @@
                     android:background="@drawable/classification" />
 
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:divider="#d9d9d9"
+                android:dividerHeight="1dp">
+            </ListView>
+
         </LinearLayout>
     </ScrollView>
 
