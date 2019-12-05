@@ -101,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_sou_suo_kuang"
+                android:onClick="newSearch"
                 android:scaleX="0.9"
                 android:scaleY="0.6"/>
             <ImageView
@@ -109,21 +110,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_sou_suo"
+                android:onClick="newSearch"
                 android:scaleX="0.4"
                 android:scaleY="0.4"/>
-
-            <EditText
-                android:clickable="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:cursorVisible="false"
-                android:inputType="text"
-                android:textColor="@color/colorWhite"
-                android:background="@null"
-                android:maxLines="1">
-            </EditText>
         </FrameLayout>
     </LinearLayout>
 
