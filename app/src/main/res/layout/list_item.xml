@@ -63,7 +63,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/item_local_music_durtion"
+            android:id="@+id/music_duration_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/author_tv"

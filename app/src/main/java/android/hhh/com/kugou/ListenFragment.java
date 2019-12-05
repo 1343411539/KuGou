@@ -3,10 +3,10 @@ package android.hhh.com.kugou;
 import android.content.Context;
 import android.content.Intent;
 
-import android.hhh.com.kugou.huang.SearchList;
 import android.hhh.com.kugou.wangsong.Love;
 
 import android.hhh.com.kugou.wangsong.MusicLibrary;
+import android.hhh.com.kugou.wangsong.MusicList;
 import android.hhh.com.kugou.wangsong.MusicListAdapter;
 import android.hhh.com.kugou.wangsong.SongSheet;
 
@@ -45,7 +45,7 @@ public class ListenFragment extends android.support.v4.app.Fragment {
     private ImageButton musiclibrary_ib, songsheet_ib, love_ib;
     private InputStream is;
     private List<SongInfo> songInfos;
-    private List<SearchList> searchLists = new ArrayList<>();
+    private List<MusicList> songLists = new ArrayList<>();
     private RecyclerView mRvSearch;
 
     public ListenFragment() {
@@ -157,13 +157,13 @@ public class ListenFragment extends android.support.v4.app.Fragment {
 
 
         for(int i = 0; i<songInfos.size(); i++){
-            SearchList searchList = new SearchList(songInfos.get(i).getSongName(), songInfos.get(i).getAuthorName());
-            searchLists.add(searchList);
+            MusicList musicList = new MusicList(songInfos.get(i).getSongName(), songInfos.get(i).getAuthorName(),songInfos.get(i).getDuration());
+            songLists.add(musicList);
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());//activity中使用this,fragment中使用getContext()
         mRvSearch.setLayoutManager(layoutManager);
-        MusicListAdapter iconAdapter = new MusicListAdapter(searchLists);
+        MusicListAdapter iconAdapter = new MusicListAdapter(songLists);
         mRvSearch.setAdapter(iconAdapter);
     }
 }

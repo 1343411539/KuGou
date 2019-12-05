@@ -1,7 +1,6 @@
 package android.hhh.com.kugou.wangsong;
 
 import android.hhh.com.kugou.R;
-import android.hhh.com.kugou.huang.SearchList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +10,24 @@ import android.widget.TextView;
 import java.util.List;
 
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder>{
-    private List<SearchList> MusicList;
+    private List<MusicList> mMusicList;
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView musicName;
-        TextView author;
+        TextView songName;
+        TextView authorName;
+        TextView duration;
 
         public ViewHolder (View view)
         {
             super(view);
-            musicName = view.findViewById(R.id.music_tv);
-            author = view.findViewById(R.id.author_tv);
+            songName = view.findViewById(R.id.music_tv);
+            authorName = view.findViewById(R.id.author_tv);
+            duration=view.findViewById(R.id.music_duration_tv);
         }
 
     }
 
-    public MusicListAdapter(List<SearchList> MusicList){
-        this.MusicList = MusicList;
+    public MusicListAdapter(List<MusicList> mMusicList){
+        this.mMusicList = mMusicList;
     }
 
     @Override
@@ -38,13 +39,14 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
 
     @Override
     public void onBindViewHolder(MusicListAdapter.ViewHolder viewHolder, int i) {
-        SearchList searchList =MusicList.get(i);
-        viewHolder.musicName.setText(searchList.getMusicName());
-        viewHolder.author.setText(searchList.getWriter());
+        MusicList musicList =mMusicList.get(i);
+        viewHolder.songName.setText(musicList.getSongName());
+        viewHolder.authorName.setText(musicList.getAuthorName());
+        viewHolder.duration.setText(musicList.getDuration());
     }
 
     @Override
     public int getItemCount() {
-        return MusicList.size();
+        return mMusicList.size();
     }
 }
