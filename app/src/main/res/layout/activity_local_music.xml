@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_profession"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_local_music"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.hhh.com.kugou.ProfessionActivity">
+    tools:context=".LocalMusicActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_profession"
+        android:id="@+id/toolbar_local"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
-        app:title="职业"
+        app:title="本地音乐"
         app:titleTextAppearance="@style/toolbar_title" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_profession"
+    <ListView
+        android:id="@+id/listView_local"
+        android:layout_below="@id/toolbar_local"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_profession" />
-
+        android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.hhh.com.kugou.huang.SettingActivity;
+import android.hhh.com.kugou.xiongli.utils.ExitApplicationUtil;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -89,6 +90,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //将这个activity放入list中，用于后面直接退出程序
+        ExitApplicationUtil.getInstance().addActivity(this);
         //绑定服;
         Log.v("hhhhhh","运行到这里了");
         conn =new myConn();

@@ -59,6 +59,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), InformationActivity.class));
                 break;
             case R.id.ll_local:
+                startActivity(new Intent(getActivity(), LocalMusicActivity.class));
                 break;
             case R.id.ll_collect:
                 break;
