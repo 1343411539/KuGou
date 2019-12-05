@@ -19,13 +19,21 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     private SexDialog dialog;
     private TextView tv_account, tv_account_text, tv_id, tv_id_text;
     private CopyContentUtil copy;
+    private TextView tv_nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info);
+
         initView();
         setOnclick();
+
+        //获得Intent对象
+        Intent intent = getIntent();
+        //取出key对应的value值
+        String nickname = intent.getStringExtra("nickname");
+        tv_nickname.setText(nickname);
     }
 
     @Override
@@ -111,6 +119,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
         tv_account_text = (TextView) findViewById(R.id.tv_account_text);
         tv_id = (TextView) findViewById(R.id.tv_id);
         tv_id_text = (TextView) findViewById(R.id.tv_id_text);
+        tv_nickname = (TextView) findViewById(R.id.tv_editInfo_content_nickname);
     }
 
     private void setOnclick() {

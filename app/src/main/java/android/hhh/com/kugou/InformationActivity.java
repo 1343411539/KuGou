@@ -37,6 +37,8 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
     private TextView sex;
     private ImageView iconSex;
 
+    int amount = 0;// 设置点赞数量的默认值
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +96,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.ll_dianZan:
-                int old = Integer.valueOf((String) tv_dianZan.getText()).intValue();
-                tv_dianZan.setText(String.valueOf(old + 1));
+                tv_dianZan.setText(++amount + "人赞过");
         }
     }
 
@@ -121,6 +122,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         editInfo = (TextView) findViewById(R.id.tv_editInfo);
         ll_dianZan = (LinearLayout) findViewById(R.id.ll_dianZan);
         tv_dianZan = (TextView) findViewById(R.id.tv_dianZan);
+        tv_dianZan.setText(amount + "人赞过");
         iconSex = (ImageView) findViewById(R.id.iv_selected_sex);
         sex = (TextView) findViewById(R.id.tv_editInfo_sex);
     }

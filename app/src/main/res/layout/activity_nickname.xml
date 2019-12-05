@@ -12,12 +12,12 @@
     tools:context="android.hhh.com.kugou.NicknameActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_nickname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
         app:navigationIcon="@drawable/ic_back"
-        app:title="编辑资料"
+        app:title="昵称"
         app:titleTextAppearance="@style/toolbar_title">
 
         <TextView
