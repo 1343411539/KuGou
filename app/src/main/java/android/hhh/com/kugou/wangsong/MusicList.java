@@ -15,7 +15,6 @@ public class MusicList {
         return duration;
     }
 
-
     public String getSongName() {
         return songName;
     }

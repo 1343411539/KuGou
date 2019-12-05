@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListenFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +24,7 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:image_scale_type="fit_xy"
+                app:image_scale_type="center_crop"
                 app:indicator_drawable_selected="@drawable/indicator_select"
                 app:indicator_drawable_unselected="@drawable/indicator_no_select"
                 app:indicator_height="5dp"
@@ -51,8 +53,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_musiclibrary" />
+                            android:background="@drawable/ic_musiclibrary"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -74,8 +76,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_songsheet" />
+                            android:background="@drawable/ic_songsheet"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -97,8 +99,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_radiostation" />
+                            android:background="@drawable/ic_radiostation"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -127,8 +129,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_love" />
+                            android:background="@drawable/ic_love"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -150,8 +152,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_recommenddaily" />
+                            android:background="@drawable/ic_recommenddaily"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -173,8 +175,8 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/ic_more" />
+                            android:background="@drawable/ic_more"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -187,75 +189,24 @@
 
             </TableLayout>
 
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout_music"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="200dp"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/newsong_btn"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="新歌"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <Button
-                    android:id="@+id/broadcast_btn"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="直播"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <Button
-                    android:id="@+id/songsheet_btn"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="歌单"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <Button
-                    android:id="@+id/video_btn"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="视频"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <Button
-                    android:id="@+id/shortvideo_btn"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="短视频"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:layout_weight="2"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="1dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:id="@+id/sort_btn"
-                    android:layout_weight="1"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="0dp"
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/classification" />
-
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
             </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_music"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:divider="#000"
-                android:dividerHeight="1dp">
-            </android.support.v7.widget.RecyclerView>
-
         </LinearLayout>
     </ScrollView>
 

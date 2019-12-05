@@ -3,18 +3,21 @@ package android.hhh.com.kugou;
 import android.content.Context;
 import android.content.Intent;
 
+import android.hhh.com.kugou.wangsong.LivebroadcastFragment;
 import android.hhh.com.kugou.wangsong.Love;
 
 import android.hhh.com.kugou.wangsong.MusicLibrary;
-import android.hhh.com.kugou.wangsong.MusicList;
-import android.hhh.com.kugou.wangsong.MusicListAdapter;
+import android.hhh.com.kugou.wangsong.MusiclistFragment;
+import android.hhh.com.kugou.wangsong.NavigationBar;
+import android.hhh.com.kugou.wangsong.NewsongFragment;
+import android.hhh.com.kugou.wangsong.ShortvideoFragment;
 import android.hhh.com.kugou.wangsong.SongSheet;
 
-import android.hhh.com.kugou.yu.SongInfo;
-import android.hhh.com.kugou.yu.SongInfoService;
+import android.hhh.com.kugou.wangsong.VideoFragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +33,6 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +44,10 @@ public class ListenFragment extends android.support.v4.app.Fragment {
     private View mView;
     private Banner banner;
     private ImageButton musiclibrary_ib, songsheet_ib, love_ib;
-    private InputStream is;
-    private List<SongInfo> songInfos;
-    private List<MusicList> songLists = new ArrayList<>();
-    private RecyclerView mRvSearch;
+    private NavigationBar adapter;
+    private List<Fragment> fragments;
+    private TabLayout mTabLayout;
+    private ViewPager viewPager;
 
     public ListenFragment() {
         // Required empty public constructor
@@ -62,7 +63,7 @@ public class ListenFragment extends android.support.v4.app.Fragment {
 
         initView();//按钮点击事件
 
-        getSearch(mView);
+        initAdapter();
         return mView;
     }
 
@@ -126,7 +127,9 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         songsheet_ib.setOnClickListener(new ButtonListener());
         love_ib=mView.findViewById(R.id.love_ib);
         love_ib.setOnClickListener(new ButtonListener());
-        mRvSearch=mView.findViewById(R.id.rv_music);
+       // mRvSearch=mView.findViewById(R.id.rv_music);
+        mTabLayout = mView.findViewById(R.id.tabLayout_music);
+        viewPager = mView.findViewById(R.id.viewpager);
 
     }
 
@@ -142,28 +145,25 @@ public class ListenFragment extends android.support.v4.app.Fragment {
                 case R.id.love_ib:
                     startActivity(new Intent(getActivity(), Love.class));
                     break;
+
                 default:
                     break;
             }
         }
     }
-    public void getSearch(View v){
-        try {
-            is = getContext().getAssets().open("music.json");
-            songInfos = SongInfoService.getInfosFromJson(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-
-        for(int i = 0; i<songInfos.size(); i++){
-            MusicList musicList = new MusicList(songInfos.get(i).getSongName(), songInfos.get(i).getAuthorName(),songInfos.get(i).getDuration());
-            songLists.add(musicList);
-        }
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());//activity中使用this,fragment中使用getContext()
-        mRvSearch.setLayoutManager(layoutManager);
-        MusicListAdapter iconAdapter = new MusicListAdapter(songLists);
-        mRvSearch.setAdapter(iconAdapter);
+    private void initAdapter(){
+        //构造适配器
+        fragments = new ArrayList<Fragment>();
+        fragments.add(new NewsongFragment());
+        fragments.add(new LivebroadcastFragment());
+        fragments.add(new MusiclistFragment());
+        fragments.add(new VideoFragment());
+        fragments.add(new ShortvideoFragment());
+        adapter = new NavigationBar(getChildFragmentManager(), fragments);
+        //设定适配器
+        viewPager.setAdapter(adapter);
+        //将TabLayout与ViewPager关联起来
+        mTabLayout.setupWithViewPager(viewPager);
     }
 }
