@@ -103,24 +103,24 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                String url=null;
-                switch (position){
+                String url = null;
+                switch (position) {
                     case 0:
-                        url="https://www.kugou.com/mvweb/html/mv_1462149.html";
+                        url = "https://www.kugou.com/mvweb/html/mv_1462149.html";
                         break;
                     case 1:
-                        url="https://www.kugou.com/mvweb/html/mv_612033.html";
+                        url = "https://www.kugou.com/mvweb/html/mv_612033.html";
                         break;
                     case 2:
-                        url="https://www.kugou.com/mvweb/html/mv_1519481.html";
+                        url = "https://www.kugou.com/mvweb/html/mv_1519481.html";
                         break;
                     case 3:
-                        url="https://www.kugou.com/mvweb/html/mv_597709.html";
+                        url = "https://www.kugou.com/mvweb/html/mv_597709.html";
                         break;
                     case 4:
-                        url="https://www.kugou.com/mvweb/html/mv_592191.html";
+                        url = "https://www.kugou.com/mvweb/html/mv_592191.html";
                         break;
                 }
                 intent.setData(Uri.parse(url));
@@ -129,7 +129,7 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         });
 
         //必须最后调用的方法，启动轮播图。
-        banner .start();
+        banner.start();
     }
 
 
@@ -146,9 +146,8 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         musiclibrary_ib.setOnClickListener(new ButtonListener());
         songsheet_ib = mView.findViewById(R.id.songsheet_ib);
         songsheet_ib.setOnClickListener(new ButtonListener());
-        love_ib=mView.findViewById(R.id.love_ib);
+        love_ib = mView.findViewById(R.id.love_ib);
         love_ib.setOnClickListener(new ButtonListener());
-       // mRvSearch=mView.findViewById(R.id.rv_music);
         mTabLayout = mView.findViewById(R.id.tabLayout_music);
         viewPager = mView.findViewById(R.id.viewpager);
 
@@ -173,7 +172,7 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         //构造适配器
         fragments = new ArrayList<Fragment>();
         fragments.add(new NewsongFragment());

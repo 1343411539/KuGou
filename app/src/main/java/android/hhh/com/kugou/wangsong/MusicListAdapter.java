@@ -1,5 +1,6 @@
 package android.hhh.com.kugou.wangsong;
 
+import android.content.Context;
 import android.hhh.com.kugou.R;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import java.util.List;
 
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder>{
     private List<MusicList> mMusicList;
+    Context context;
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView songName;
         TextView authorName;
@@ -29,6 +32,11 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     public MusicListAdapter(List<MusicList> mMusicList){
         this.mMusicList = mMusicList;
     }
+    public MusicListAdapter(Context context, List<MusicList> mMusicList){
+        this.context=context;
+        this.mMusicList = mMusicList;
+    }
+
 
     @Override
     public MusicListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
