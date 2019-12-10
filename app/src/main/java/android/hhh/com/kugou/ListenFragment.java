@@ -14,11 +14,11 @@ import android.hhh.com.kugou.wangsong.ShortvideoFragment;
 import android.hhh.com.kugou.wangsong.SongSheet;
 
 import android.hhh.com.kugou.wangsong.VideoFragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,11 +77,11 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         imgs.add(R.drawable.background5);
 
         ArrayList<String> title = new ArrayList<>();
-        title.add("图1");
-        title.add("图2");
-        title.add("图3");
-        title.add("图4");
-        title.add("图5");
+        title.add("芒种");
+        title.add("Gaints");
+        title.add("天气之子");
+        title.add("最美的太阳");
+        title.add("Good Time");
 
         //设置内置样式.
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
@@ -103,7 +103,28 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Log.i("tag", "你点了第"+position+"张轮播图");
+                Intent intent=new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                String url=null;
+                switch (position){
+                    case 0:
+                        url="https://www.kugou.com/mvweb/html/mv_1462149.html";
+                        break;
+                    case 1:
+                        url="https://www.kugou.com/mvweb/html/mv_612033.html";
+                        break;
+                    case 2:
+                        url="https://www.kugou.com/mvweb/html/mv_1519481.html";
+                        break;
+                    case 3:
+                        url="https://www.kugou.com/mvweb/html/mv_597709.html";
+                        break;
+                    case 4:
+                        url="https://www.kugou.com/mvweb/html/mv_592191.html";
+                        break;
+                }
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
 
