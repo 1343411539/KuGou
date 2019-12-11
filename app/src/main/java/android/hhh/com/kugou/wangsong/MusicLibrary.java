@@ -1,10 +1,7 @@
 package android.hhh.com.kugou.wangsong;
 
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.database.Cursor;
-import android.hhh.com.kugou.ListenFragment;
-import android.hhh.com.kugou.MainActivity;
 import android.hhh.com.kugou.R;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -79,7 +76,7 @@ public class MusicLibrary extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MusicLibrary.this, MainActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
+
 }

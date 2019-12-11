@@ -1,11 +1,9 @@
 package android.hhh.com.kugou.wangsong;
 
-import android.content.Intent;
-import android.hhh.com.kugou.MainActivity;
+
 import android.hhh.com.kugou.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +28,6 @@ public class Love extends AppCompatActivity implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(Love.this, MainActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
 }
