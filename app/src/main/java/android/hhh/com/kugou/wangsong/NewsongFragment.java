@@ -39,7 +39,7 @@ public class NewsongFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_newsong, container, false);
         mRvSearch=mView.findViewById(R.id.rv_music);
-        getSearch(mView);
+        getSearch(mView);//歌曲信息
 
         return mView;
     }

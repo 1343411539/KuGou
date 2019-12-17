@@ -185,5 +185,6 @@ public class ListenFragment extends android.support.v4.app.Fragment {
         viewPager.setAdapter(adapter);
         //将TabLayout与ViewPager关联起来
         mTabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(4);//预加载页面数
     }
 }
